@@ -1,0 +1,14 @@
+.form_input{
+    display: flex;
+    flex-direction: column;
+
+}
+
+#from-to{
+    display: flex;
+    justify-content: space-around;
+
+}
+#from-to input{
+    width: 100%;
+}

@@ -1,0 +1,390 @@
+.passanger_info,.payment-info{
+    padding: 1.1rem 5%;
+}
+.passanger_info h2{
+    padding: 1.3rem 0;
+    font-weight: 500;
+    color: rgb(79, 71, 71);
+}
+.main-section{
+    /* background-color: rgb(222, 222, 89); */
+    display: flex;
+
+}
+.left{
+    width: 70%;
+    /* background-color: aqua; */
+    /* padding: 0 1.3rem; */
+}
+.left h3{
+    color: orange;
+}
+.right{
+    background-color: gray;
+    width: 30%;
+    
+}
+#hr{
+    height: 0.2rem;
+    background-color: rgb(231, 227, 227);
+    margin-top: 0.2rem;
+    border: none;
+}
+.passenger-details,.contact-information{
+    width: auto;
+    border-radius: 0.5rem;
+    padding: 0.7rem 0.5rem;
+    background-color: white;
+    border: 2px solid rgb(217, 214, 214);
+    margin: 1.2rem 0;
+
+}
+.passenger-details h4,.contact-information h4{
+    color: orange;
+    margin-bottom: 0.5rem;
+}
+.passenger-details input,.contact-information input,.passenger-type{
+    padding: 0.1rem 0.5rem;
+    color: gray;
+    font-size: 0.8em;
+    width: 20%;
+    box-sizing: border-box;
+    margin-bottom: 1.1rem;
+    border-radius: 0.2rem;
+    border: 0.5px solid rgb(190, 186, 186);
+    height: 1.7rem;
+}
+/* .passenger-type{
+    appearance: none;
+
+} */
+.passenger-details p ,.contact-information p{
+
+    font-size: 0.9em;
+    font-weight: 500;
+    padding: 0.5rem 0;
+
+}
+
+/* ----------------------------------------------------------------peyment----------------------------- */
+
+.payment-info{
+    /* background-color: rgb(214, 214, 90); */
+    display: flex;
+}
+.payment-left{
+    /* background-color: aqua; */
+    width: 70%;
+    /* padding: 0.5rem 0.5rem; */
+}
+.payment-left h3{
+    padding-left:0.5rem;
+}
+.payment-right{
+    background-color: gray;
+    width: 30%;
+
+}
+#section-heading{
+    color: orange;
+}
+.payment-details-caution{
+    width: 100%;
+    border: 2px solid;
+    border: 2px solid rgb(217, 214, 214);
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    
+
+
+
+
+
+}
+#boxx li{
+    list-style-type:circle;
+}
+#boxx{
+    border: 2px solid orange;
+    text-align: center;
+    padding: 0.9rem 1.2rem;
+    background-color: white;
+    margin: 1.2rem 0;
+    
+}
+#boxx span{
+    font-size: 1.4em;
+    font-weight: 500;
+}
+#image-train{
+    width: 100%;
+}
+#image-train img{
+    width: 100%;
+    height: auto;
+    display: block;
+}
+#boxx li{
+    list-style-type:square;
+    font-size: 0.9em;
+    padding: 0 5%;
+}
+#tk{
+    color: green;
+}
+/* --------------------------payment---------------------------------------- */
+.payment-method{
+    /* background-color: bisque; */
+}
+.payment-option-tab{
+    /* background-color: cadetblue; */
+    display: flex;
+}
+.mobile-banking-credit-debit-card{
+    background-color: white;
+    text-align: center;
+    padding: 1.1rem 1.2rem;
+    box-sizing: border-box;
+    border: 1px solid orange;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    color: rgb(111, 107, 107);
+}
+.active-border p{
+    padding-bottom: 0.2rem;
+    border-bottom: 2px solid orange;
+}
+.select-payment-method{
+    border: 1px solid orange;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.1rem 0;
+    display: none;
+
+}
+.active-payment{
+    display: flex;
+}
+.bkash-nagad-rocket-upay{
+    width: 30%;
+    height: 3rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.5rem 2%;
+    background-color: white;
+    border: 1px solid rgb(184, 182, 182);
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    /* background-color: yellow; */
+}
+#img{
+    width: 35%;
+}
+
+.bkash-nagad-rocket-upay:hover{
+    border:1.5px solid green;
+
+}
+
+#payment_checkbox{
+    border:2px solid blue;
+    cursor: pointer;
+    width: 10%;
+    border-radius: 5rem;
+}
+.bkash-nagad-rocket-upay:hover + #payment_checkbox{
+    width: 20%;
+}
+#upay #img{
+    width: 25%;
+}
+.bkash-nagad-rocket-upay div{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn-continue-purchase{
+    height: 3rem;
+    background-color: gray;
+    border-radius: 0.4rem;
+    font-size: 1em;
+    font-weight:600;
+    color: whitesmoke;
+    cursor: not-allowed;
+    border: none;
+
+    
+}
+
+.activee{
+    background-color: rgb(6, 118, 6);
+    cursor: pointer;
+}
+
+
+
+#btn-container{
+    width: 30%;
+}
+
+
+.activee:hover{
+    background-color: rgb(3, 88, 3);
+}
+
+#input_field{
+    width: 30%;
+    height: 2rem;
+}
+
+
+
+/* -------------------------right and payment-right----------------------------------- */
+
+.right,.payment-right{
+    height: 30%;
+    margin-left: 0.8rem;
+    box-sizing: border-box;
+    padding: 0.6rem 0.9rem;
+    background-color: rgb(242, 241, 241);
+    border-radius: 0.5rem;
+}
+#dep{
+    font-weight: 500;
+}
+.passenger-info-journey-details div{
+    display: flex;
+    justify-content: space-between;
+}
+.passenger-info-journey-details div p{
+    padding: 0.5em 0;
+}
+#spann{
+    padding: 0.5em 0;
+}
+
+
+@media screen and (width <=1028px) {
+    #input_field{
+        width: 60%;
+    }
+    .bkash-nagad-rocket-upay{
+        width: 50%;
+    }
+    #img{
+        width: 40%;
+    }
+    #btn-container{
+        width: 50%;
+    }
+    .btn-continue-purchase{
+        font-size: 0.9em;
+    }
+}
+@media screen and (width <=950px) {
+    #input_field{
+        width: 80%;
+    }
+    .passenger-info-journey-details h3{
+        font-size: 1.1em;
+    }
+    .bkash-nagad-rocket-upay{
+        width: 50%;
+    }
+    #img{
+        width: 40%;
+    }
+    #btn-container{
+        width: 50%;
+    }
+
+}
+@media screen and (width <=725px) {
+    
+    .passenger-info-journey-details h3{
+        font-size: 1em;
+    }
+    .passenger-info-journey-details p{
+        font-size: 0.9em;
+    }
+    .bkash-nagad-rocket-upay{
+        width: 50%;
+    }
+    #img{
+        width: 40%;
+    }
+    #btn-container{
+        width: 50%;
+    }
+
+
+}
+
+@media screen and (width <=670px) {
+    
+    .passenger-info-journey-details h3{
+        font-size: 0.9em;
+    }
+    .passenger-info-journey-details p{
+        font-size: 0.7em;
+    }
+    .bkash-nagad-rocket-upay{
+        width: 50%;
+    }
+    #img{
+        width: 40%;
+    }
+    #btn-container{
+        width: 50%;
+    }
+
+
+}
+@media screen and (width <=614px) {
+    
+    .main-section{
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+    .right{
+        width: 100%;
+        margin-left: 0;
+    }
+    .left{
+        width: 100%;
+        margin-top: 2%;
+    }
+    .payment-info{
+        flex-direction: column-reverse;
+    }
+    .payment-right{
+        width: 100%;
+        margin-left: 0;
+    }
+    .payment-left{
+        width: 100%;
+    }
+    .bkash-nagad-rocket-upay{
+        width: 50%;
+    }
+    #img{
+        width: 40%;
+    }
+    #btn-container{
+        width: 50%;
+    }
+    #boxx{
+        font-size: 0.8.5em;
+    }
+
+
+}
