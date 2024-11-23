@@ -1,0 +1,209 @@
+.main-body{
+    background-image: url(https://railapp.railway.gov.bd/assets/images/splash-screen/bg.svg);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: contain;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(213, 211, 211,0.5);
+    position: relative;
+    
+}
+.form-container{
+    /* background-color: rgb(49, 88, 9); */
+    width: 15%;
+    padding: 0 0.5%;
+    margin: auto;
+    position: relative;
+    top: 15%;
+
+    /* margin-top: 5%; */
+}
+.login-second-part h1{
+    color: orange;
+    margin-bottom: 0.5rem;
+}
+.login-second-part-second-div{
+    /* background-color: antiquewhite; */
+    display: flex;
+    justify-content: center;
+    font-size: 0.9em;
+    color: gray;
+    margin-bottom: 0.5rem;
+}
+.login-second-part-second-div li{
+    margin-left: 0.5rem;
+   
+}
+#logo-login{
+    width: 40%;
+    /* background-color: blueviolet; */
+    margin: auto;
+}
+#logo-login img{
+    width: 100%;
+}
+.login-second-part{
+    text-align: center;
+}
+.login-second-part-second-div{
+    text-align: center;
+}
+.login-third-part-third-div{
+    background-color: aliceblue;
+    text-align: center;
+    padding: 8% 4%;
+    box-sizing: border-box;
+    border-radius: 0.2rem;
+}
+.login-third-part-forget{
+    display: flex;
+    justify-content: space-around;
+    padding: 0.6rem 0.2%;
+    box-sizing: border-box;
+    border: 1px solid rgb(210, 209, 209);
+    font-size: 0.9em;
+    border-radius: 0.3rem;
+    margin-bottom: 0.7rem;
+
+}
+.login-btn{
+    /* background-color: rgb(150, 85, 208); */
+    background-color: rgba(4, 74, 4,0.6);
+    color: rgb(34, 1, 1);
+    border-radius: 0.2rem;
+    cursor: not-allowed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+        
+}
+
+.login-btn img{
+    height: 1.3rem;
+    width: 1.3rem;
+    object-fit: contain;
+    margin-left: 0.4rem;
+
+
+}
+.active-login-btn{
+    cursor: pointer;
+    background-color: rgb(4, 74, 4);
+}
+#part-input{
+    width: 100%;
+    box-sizing: border-box;
+}
+.password-box{
+    /* background-color: cadetblue; */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#part-input{
+    position: relative;
+    height: 1.8rem;
+    margin-bottom: 1.2rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: gray;
+    border: none;
+}
+.eye{
+    position: absolute;
+    right: 0;
+    top: 0.3rem;
+    cursor: pointer;
+    opacity: 0.5;
+
+
+}
+.eye:hover{
+    opacity: 1;
+}
+.login-third-part-third-div a{
+    /* text-decoration: none; */
+    color: gray;
+}
+
+/* 
+---------------------------registration--------------------------------------- */
+
+.reg-body{
+    width: 30%;
+    background-color: blanchedalmond;
+    margin: auto;
+    position: relative;
+    top: 15%;
+    border-radius: 0.5rem;
+}
+.firstname-surname{
+    display: flex;
+    justify-content: space-between;
+
+}
+.firstname-surname #part-input{
+    width: 45%;
+    /* background-color: bisque; */
+}
+
+@media screen and (width <= 1440px) {
+    .form-container{
+        width: 20%;
+    }
+    .reg-body{
+        width: 35%;
+    }
+}
+@media screen and (width <= 1030px) {
+    .form-container{
+        width: 25%;
+    }
+    .reg-body{
+        width: 40%;
+    }
+}
+@media screen and (width <= 780px) {
+    .form-container{
+        width: 30%;
+    }
+    .reg-body{
+        width: 45%;
+    }
+}
+@media screen and (width <= 610px) {
+    .form-container{
+        width: 45%;
+    }
+    .reg-body{
+        width: 70%;
+    }
+}
+@media screen and (width <= 430px) {
+    .form-container{
+        width: 55%;
+    }
+    .reg-body{
+        width: 75%;
+    }
+}
+@media screen and (width <= 372px) {
+    .form-container{
+        width: 60%;
+    }
+    .reg-body{
+        width: 80%;
+    }
+}
+@media screen and (width <= 314px) {
+    .form-container{
+        width: 70%;
+    }
+    .reg-body{
+        width: 90%;
+    }
+}

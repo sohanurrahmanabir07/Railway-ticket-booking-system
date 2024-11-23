@@ -1,0 +1,256 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
+.navbar{
+
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5%;
+    border-bottom: 2px solid rgb(177, 175, 175);
+    padding: 0 5%;
+    align-items: center;
+    /* position: relative; */
+
+    /* width: 100vw; */
+    
+
+}
+.navbar li{
+    list-style: none;
+    text-align: center;
+}
+.navbar ul{
+    display: flex;
+    margin-right: 10rem;
+}
+.navbar ul li{
+    margin-right: 50px;
+    font-size: 1.4em;
+    margin: 0;
+    font-weight: 600;
+    color: rgb(65, 63, 63);
+    
+    
+
+    
+}
+.navbar ul a{
+    text-decoration: none;
+    color: black;
+    /* background-color: blueviolet; */
+    display: flex;
+    /* margin-right: 4rem; */
+}
+.navbar ul .active{
+    border-bottom: 3px solid rgb(72, 70, 70);
+    display: block;
+   
+}
+
+.profile{
+    border-radius: 5px;
+    border: 3px solid rgb(206, 206, 206);
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 5px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+}
+
+.profile i{
+    font-size: 0.8em;
+    transform: rotate(0deg);
+    transition: all 0.4s ease-in;
+}
+.profile i.rotate {
+    transform: rotate(-180deg); /* Change this to a noticeable rotation */
+}
+.Logo-name{
+    display: flex;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #da924e;
+    align-items: center;
+
+
+}
+.Logo{
+    /* font-size: 1.7rem;
+    font-weight: 700;
+    /* background-color: rgb(13, 222, 222); */
+    /* margin: 0; */
+    /* background-color: blueviolet; */
+    width: 20%;
+}
+.Logo img{
+    width: 100%;
+}
+.dropdown{
+    position: absolute;
+    background-color: white;
+    padding: 1% 1%;
+    border-radius: 5px;
+    border: 2px solid gray;
+    z-index: 1;
+
+
+}
+.dropdown div h1{
+    font-size: 1.4em;
+}
+.dropdown div div{
+    font-size: 1em;
+}
+.dropdown-element{
+    font-size: 1.2rem;
+    padding: 5px;
+    cursor: pointer;
+    
+}
+#dropdown-element-email{
+    /* background-color: #da924e; */
+    display: block;
+}
+.dropdown-element:hover{
+    transform: scale(1.03);
+}
+span i{
+    margin-right: 0.71rem;
+}
+
+.nav-profile{
+    display: flex;
+    /* background-color: chartreuse; */
+    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: yellow; */
+}
+.nav-profile ul{
+    /* background-color: burlywood; */
+    width: 60%;
+}
+.nav-profile ul li{
+    /* background-color: aqua; */
+    margin-right: 1.5rem;
+    font-size: 1em;
+    width: 100%;
+    
+}
+.profile-info{
+    font-size: 1.1em;
+    width: 50%;
+
+}
+.profile div{
+    margin-right: 0.4rem;
+}
+/* 
+______________________sidebar______________________________ */
+.sidebar{
+    background-color: yellowgreen;
+    position:absolute;
+    right: -100%;
+    /* transform: translateX( 200%); */
+    /* transform: scaleX(0); /* Initially hidden */
+    /* transform-origin: right;  */
+    width: 30%;
+    height: 100%;
+    border-radius: 5px;
+    transition: 0.4s  ease-in-out;
+    z-index: 4;
+
+}
+.active{
+
+    right: 0;
+
+}
+body{
+    overflow-x: hidden
+}
+.sidebar li{
+    /* background-color: aliceblue; */
+    margin-top: 3%;
+    height: 3rem;
+    border-bottom: 2px solid rgb(173, 173, 173);
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 1% 0;
+    color: rgb(63, 61, 61);
+    font-size: 1.3rem;
+}
+
+/* 
+______________________sidebar______________________________ */
+
+@media (max-width:1240px){
+    .nav-profile ul li{
+        font-size: 0.8em;
+        /* width: 100%; */
+    }
+    .nav-profile ul{
+        /* background-color: burlywood; */
+        width: 80%;
+    }
+}
+
+
+.navbar_btn{
+    display:none;
+    cursor: pointer;
+
+    
+}
+.navbar_btn img{
+    width: 40%;
+}
+
+@media screen and (width <= 1760px){
+    .nav-profile{
+        /* background-color: #da924e; */
+        font-size: 0.9em;
+    }
+    .profile{
+        font-size: 0.9em;
+    }
+}
+
+@media screen and (width <= 1600px){
+    .nav-profile{
+        font-size: 0.7em;
+    }
+}
+@media screen and (width <=1390px){
+    .nav-profile{
+        display: none;
+    }
+    .navbar_btn{
+        display: block;
+    }
+}
+@media screen and (width <=580px){
+    .sidebar{
+        width: 45%;
+    }
+}
+@media screen and (width <=422px){
+    .sidebar{
+        width: 45%;
+    }
+}
+@media screen and (width <=319px){
+    .sidebar{
+        width: 55%;
+    }
+}
+@media screen and (width <=319px){
+    .sidebar{
+        width: 55%;
+    }
+}

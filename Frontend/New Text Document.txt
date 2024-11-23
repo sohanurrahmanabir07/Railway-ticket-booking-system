@@ -1,0 +1,529 @@
+result->  (universal seat)
+
+1)result_train->seat_selection
+2)result_train->seat_selection
+
+
+
+
+
+
+
+
+
+
+
+
+
+#result_train.jsx->
+
+#########################################################################  Start #################################################################################################################
+
+
+import React, { useState, useRef, useEffect } from 'react'
+import './css_comp/result_train.css'
+import Seat_selection from './seat_selection'
+import { useSelector } from 'react-redux'
+
+export default function Result_train(props) {
+
+    const showClassInfo = useRef(null)
+    const seat_Show = useRef(null)
+    const [show, setShow] = useState(false)
+    const [dekhao, setDekhao] = useState(false)
+    const [height, setHeight] = useState(0)
+    const journey_info = useSelector((state) => state.var.home_page_info)
+    const [filtered_data_for_seat_selection,setFor_seat_selection]=useState([])
+    const [seat_details,setSeat_Details]=useState([])
+    const selected=props.selected
+    const setSelected=props.setSelected
+    // console.log("from result train",selected)
+
+
+    // useEffect(()=>{
+    //     const seat_show=seat_Show.current
+    //     if(showSeat){
+
+    //         seat_show.style.maxHeight=`${(seat_show.scrollHeight)}px`
+    //         console.log('height',seat_show.scrollHeight)
+    //     }else{
+    //         seat_show.style.maxHeight=`0px`
+    //     }
+    // },[showSeat])
+
+    useEffect(() => {
+        if (seat_Show.current) {
+            setHeight(seat_Show.current.scrollHeight); // Update the height after DOM renders
+        }
+    }, [dekhao]);
+
+
+    useEffect(() => {
+
+        // console.log(show)
+
+        const class_info = showClassInfo.current
+        if (show) {
+            // class_info.style.maxHeight= `${(class_info.scrollHeight)+200}px`
+            class_info.style.maxHeight = `${(class_info.scrollHeight)}px`
+            // console.log(class_info.maxHeight)
+        }
+        else {
+            class_info.style.maxHeight = `0px`
+        }
+    }, [show])
+
+    const seat=(trainID,class_name)=>{
+        const info=props.all_info
+        const filtered_info=info.filter((item)=>item.train_id==trainID && item.class_name==class_name)
+        setFor_seat_selection(filtered_info)
+
+
+
+    }
+
+   const clearPreviousSelections=props.clearPreviousSelections
+
+
+
+    return (
+        <div>
+            <div className='train-info'>
+                <div className='train-name' onClick={() => { setShow(!show); setDekhao(false) }}>
+                    <h3>{props.train_name}</h3>
+                    <i className={`up-down fa-solid fa-angle-up ${show ? 'up-down-active' : ''}`} style={{ color: '#eaae0b' }}></i>
+                </div>
+                <div className={`class-info`} ref={showClassInfo}>
+                    <div className='train-timing-details'>
+                        <div className='time'>
+                            <div>
+                                <div>
+                                    <span>27 SEP,</span>
+                                    <span>06:30 AM</span>
+                                </div>
+                                <div>
+                                    {journey_info.from}
+                                </div>
+                            </div>
+
+                            <div>
+                                <div>
+                                    <span>27 SEP,</span>
+                                    <span>01:00 AM</span>
+                                </div>
+                                <div>
+                                    {journey_info.to}
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div className='train-details'>
+                            <i className="fa-solid fa-location-dot"></i>
+                            <h4>Train Details</h4>
+
+                        </div>
+                        {/* (i)=>i.train_id==props.trainID_classDetails[0] && i.class_name==props.trainID_classDetails[index] */}
+                    </div>
+                    <div className='all-classes'>
+                        {props.trainID_classDetails.map((item, index) => {
+                            const trainID=props.trainID_classDetails[0]
+                            // console.log('train_id',trainID)
+                            if (index != 0) {
+                                
+                                const info=props.all_info
+                                let row=(info.filter((i)=>i.train_id==props.trainID_classDetails[0] && i.class_name==props.trainID_classDetails[index]))
+                                row=row.slice(0,1)[0]
+                                const  class_name=props.trainID_classDetails[index]
+                            
+                                return (
+                                    <div className='classes'>
+                                        <div className='classes-info-1'>
+                                            <h3>{class_name}</h3>
+                                            <h4 id='green'>৳{row.price}</h4>
+                                            <p id='vat'>Including vat</p>
+                                        </div>
+                                        <hr id='horizontal-line' />
+                                        <div className='classes-info-2'>
+                                            <p>Available Tickets <br />
+                                                (Counter + Online)</p>
+                                            <h3 id='greeen'></h3>
+                                            <button className='class-btn' onClick={() =>{ setDekhao(true); seat(trainID,class_name) }}>BOOK NOW</button>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        }
+
+                        )}
+                       
+
+
+                    </div>
+
+                </div>
+                {/* {filtered_data_for_seat_selection ? console.log('yes it exist'): console.log('it doesnt')} */}
+               
+                <div className={`show_seat ${dekhao && filtered_data_for_seat_selection ? 'show_seat_pattern' : ''} `}>
+                    <Seat_selection seat_details={seat_details} setSeat_Details={setSeat_Details}  selected={selected} setSelected={setSelected} compartment={filtered_data_for_seat_selection} />
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+    )
+}
+
+
+########################################### end ###########################################################################################################################################
+
+
+
+
+
+
+
+seat_selection.jsx->
+
+----------------------------------------start-------------------------------------------------------
+
+
+import React, { useState, useEffect, useRef } from 'react'
+import './css_comp/seat_selection.css'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { insert_selected, clear_selected, clear_all_selected } from './redux'
+import { toast, ToastContainer } from 'react-toastify'
+
+
+export default function Seat_selection(props) {
+
+  const seat = []
+  const [booked, setBooked] = useState([18, 19, 30])
+  // const [selected, setSelected] = useState([])
+  const compartment = props.compartment
+  const [sortedCompartment, setSortedCompartment] = useState([]);
+  const [currentCompartment, setCurrentCompartment] = useState()
+  const [selected_compartment, setSelected_Compartment] = useState([])
+  const [total_amount, setTotal_Amount] = useState(0)
+  const [seat_limited, setSeat_Limited] = useState(false)
+
+  // _________________practice-------------
+
+  // const [seat_detials, setSeat_Details] = useState([])
+
+  const seat_detials=props.seat_details
+  const setSeat_Details=props.setSeat_Details
+
+
+  // _________________practice-------------
+
+  const selected = props.selected
+  const setSelected = props.setSelected
+
+
+  let row_count = 0;
+  const dispatch = useDispatch()
+  const seat_selected = useSelector((state) => state.var.selected)
+
+  const unselected = useRef()
+
+
+
+
+
+  useEffect(() => {
+
+    compartment.sort((item1, item2) => (item1.remaining_seat < item2.remaining_seat) ? 1 : -1)
+    setCurrentCompartment(compartment[0])
+    setSelected_Compartment(compartment[0]?.compartment_id)
+    setSortedCompartment(compartment)
+
+
+
+  }, [compartment])
+  const column = 5
+
+
+  const row = currentCompartment ? ((Math.floor(currentCompartment.total_seat) / column) + 1) : 0
+
+
+
+  const navigate = useNavigate()
+  let count = 1
+  useEffect(() => {
+
+    const check_seat = () => {
+
+      if (selected.length == 4) {
+        setSeat_Limited(true)
+      } else {
+        setSeat_Limited(false)
+      }
+
+    }
+    check_seat();
+  }, [selected])
+  const clear_all_selected_seats = () => {
+    setSelected([])
+    dispatch(clear_all_selected())
+  }
+  const clear_seat_details=()=>{
+    alert('here')
+    setSeat_Details([])
+  }
+
+
+
+  const handleBooked = (key, seatnumber) => {
+    const newBooked = seat_selected.filter((item) => item[2] == key[2] && item[0] == key[0])
+    if (newBooked.length < 1) {
+
+      if (seat_selected.length > 0) {
+        if (seat_selected[0][5] == key[5]) {
+
+          setSelected((prevValue) => [...prevValue, key])
+          setSeat_Details((prev) => [...prev, key])
+          setTotal_Amount((prev) => prev + parseInt(key[3]))
+          dispatch(insert_selected(key))
+
+        } else {
+          setSeat_Details([])
+          const prev_train = seat_selected[0][6]
+          console.log('You have previously selected in')
+          toast.warning(`You have previously selected in ${prev_train}`, {
+            autoClose: false
+          })
+
+          setTimeout(() => {
+            toast.info('Tap here to remove prevous selection', {
+              onClick: () => { 
+                clear_all_selected_seats();
+                clear_seat_details();
+                },
+              autoClose: 4000
+            })
+          }, 1000);
+        }
+
+      } else {
+        setSelected((prevValue) => [...prevValue, key])
+        setSeat_Details((prev) => [...prev, key])
+        setTotal_Amount((prev) => prev + parseInt(key[3]))
+        dispatch(insert_selected(key))
+
+      }
+
+
+
+
+    } else {
+      const newBooked = selected.filter((item) => !(item[0] == key[0] && item[2] == key[2]))
+      setSelected(newBooked)
+      setSeat_Details(newBooked)
+      setTotal_Amount((prev) => prev - parseInt(key[3]))
+      dispatch(clear_selected(key))
+      // console.log('removed',seat_selected)
+
+    }
+    // console.log('the seat',key)
+    console.log('from redux',seat_selected)
+
+
+  }
+
+  // useEffect(()=>{
+
+  // },[sel])
+
+  for (let i = 0; i < row; i++) {
+    const roww = []
+
+    if ((i == Math.floor(row / 2))) {
+      roww.push(<div>
+        <br />
+        <br />
+      </div>)
+    } else {
+
+      for (let j = 0; j < column + 1; j++) {
+        if (j == 2 || (i == Math.floor(row / 2))) {
+          roww.push(
+            <div id="space" key={`${i}-${j}`}>
+
+            </div>
+          )
+        } else {
+          const currenCount = count
+          // const key_value=`${currentCompartment.compartment_id}-${currentCompartment.compartment_name}-${currenCount}`
+          const key_value = [currentCompartment.compartment_id, currentCompartment.compartment_name, currenCount, currentCompartment.price, currentCompartment.class_name, currentCompartment.train_id, currentCompartment.train_name]
+          if (booked.find((i) => i == count)) {
+            roww.push(<div id='seat-booked' key={key_value}>
+              {currentCompartment.compartment_name}-{count}
+            </div>)
+          } else if (selected.find((i) => i[2] == key_value[2] && i[0] == key_value[0])) {
+
+            roww.push(<div id='seat-selected' onClick={() => handleBooked(key_value, currenCount)} key={key_value}>
+              {currentCompartment.compartment_name}-{count}
+            </div>)
+
+          }
+
+
+          else {
+            roww.push(<div id={`seat${seat_limited ? 'limited' : ''}`} disabled={seat_limited == true} ref={unselected} onClick={!seat_limited ? () => handleBooked(key_value, currenCount) : null} key={key_value}>
+              {currentCompartment.compartment_name}-{count}
+            </div>)
+          }
+
+          count++
+        }
+
+
+      }
+
+    }
+
+
+    seat.push(roww)
+
+  }
+  const Change_Compartment = (e) => {
+    const key_value = e.target.value
+    const choosen_compartment = sortedCompartment.filter((item) => item.compartment_id == key_value)
+    setCurrentCompartment(choosen_compartment[0])
+    setSelected_Compartment(choosen_compartment[0].compartment_id)
+
+
+  }
+
+ 
+
+
+  return (
+    <>
+
+      <div id='select_show'>
+        <ToastContainer/>
+        <div id='caution'>Choose your seat(s)** Maximum 4 seats can be booked at a time.</div><hr />
+        <div id='caution'><p>To know seat number(s), rest the cursor on your desired seat(s). Click on it to select or deselect.</p></div>
+
+        <section className='parent'>
+
+          <div className='left-child'>
+
+            <h2>Select Coach</h2>
+            <select name="" value={selected_compartment} onChange={Change_Compartment} id="select-coach" >
+              {/* <option value="">Choose Compertment </option> */}
+              {compartment.map((item) => (
+                <option key={item.compartment_id} value={item.compartment_id}>{item.compartment_name}-{item.remaining_seat}</option>
+              ))}
+            </select>
+
+            <div className="seat-status">
+              <div className='available'>
+                <p>Available</p>
+                <div id='box'>
+
+                </div>
+              </div>
+              <div className='available' id='booked'>
+                <p>Booked</p>
+                <div id='box'>
+
+                </div>
+              </div>
+              <div className='available' id='selected'>
+                <p>Selected</p>
+                <div id='box'>
+
+                </div>
+              </div>
+
+            </div>
+
+
+            <div className="seat-choose">
+              {seat.map((item, index) =>
+
+
+              (
+                <div id='row'>
+                  {item.map((element, index) => (
+                    element
+                  ))}
+                </div>
+
+              )
+
+              )}
+
+            </div>
+
+
+          </div>
+
+          <div className="right-child">
+
+            <h2>Seat Details</h2>
+            <div id='ticket-details'>
+              <p>Class</p>
+              <p>Seats</p>
+              <p>Fare</p>
+            </div>
+
+
+            {seat_detials.map((item) => (
+
+
+              <div id='tickets'>
+
+                <p >{item[4] == 'AC Berth' ? item[4].slice(0, 4) : item[4]}-{item[1]}</p>
+                <p>{item[2]}</p>
+                <p>{item[3]}</p>
+
+
+              </div>
+            )
+
+
+
+            )}
+
+            {/* <div>
+              {arr.map((item)=>(
+                <li>{}</li>
+              ))}
+
+            </div>
+
+            <div>
+              <p>hello</p>
+            </div> */}
+
+
+            <div id='Total-amount'>
+
+
+              <h3>Total: ৳ {total_amount} </h3>
+            </div>
+
+            <div id='btn-purchase'><button onClick={() => navigate('/passangerinfo')} id='btn-continue-purchase'>CONTINUE PURCHASE</button></div>
+            <button onClick={()=>setSeat_Details([])}> Reset</button>
+          </div>
+
+
+
+        </section>
+      </div>
+
+    </>
+  )
+}
+
+
+
+--------------------------------------------end ---------------------------------------------------------------------------

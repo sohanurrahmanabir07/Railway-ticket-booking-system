@@ -1,0 +1,402 @@
+.results {
+    /* Padding on the left and right to limit inner content width */
+    width: 100%;
+    box-sizing: border-box;
+    /* display: flex; */
+}
+
+.container-1 {
+    background-color: rgb(231, 231, 231); /* Full-width background color */
+    width: 100%;
+
+}
+.img-1{
+    width: 90%;
+    /* display: none; */
+    /* margin-left: 1.5rem; */
+}
+.img-1 img{
+    width: 100%;
+}
+.container-1-element{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10%;
+    align-items: center;
+
+    /* justify-content: space-between; */
+}
+.middle{
+    display: flex;
+    font-size: 20px;
+    font-weight: 600;
+    /* width: 30%; */
+}
+.prev{
+    background-color:  rgb(255, 255, 255);
+    padding: 10px 20px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    cursor: pointer;
+    color: rgb(201, 133, 7);
+    /* width: 10%; */
+}
+.next{
+    background-color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    margin-left: 3px;
+    cursor: pointer;
+    color: rgb(201, 133, 7);
+}
+
+.modify{
+    width: 15rem;
+    height: 2.8rem;
+    border-radius: 50px;
+    border: none;
+    color:rgb(201, 133, 7);
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color:  rgb(255, 255, 255);
+}
+/* Apply the same hover effect to .modify, .prev, and .next */
+.modify:hover, .prev:hover, .next:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+    transition: transform 0.3s ease; /* Add smooth transition */
+}
+/* -------------------------container-2------------------------------------------- */
+.container-2{
+    /* background-color: yellow; */
+    padding: 10px 5%;
+    display: flex;
+    justify-content: center;
+    /* background-color: yellow; */
+    /* justify-content: space-around; */
+}
+.results-right{
+    margin-left: 1.22rem;
+    width: 25%;
+     
+}
+.right-child-result{
+    width: 100%;
+    border: 2px solid gray;
+    box-sizing: border-box;
+    padding: 2rem 0.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.6rem;
+    background-color: white;
+    position:sticky;
+    top: 10px;
+    /* background-color: yellow; */
+
+}
+.journey-info{
+    color: rgb(148, 98, 4);
+}
+#loading_holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:70vh; /* Takes up full viewport height */
+}
+
+.results-left{
+    /* background-color: lightblue; */
+    width: 60%;
+}
+
+#ticket-details{
+    width: 100%;
+    height: 1.5rem;
+    border: 2px solid rgb(126, 110, 110);
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1em;
+    font-weight: 500;
+    color:rgb(152, 146, 146) ;
+    align-items: center;
+    border-radius: 5px;
+    padding: 0.3rem;
+    box-sizing: border-box;
+
+
+}
+#tickets{
+    width: 100%;
+    /* height: 20%; */
+    /* border: 2px solid rgb(126, 110, 110); */
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    font-weight:600;
+    color:rgb(79, 77, 77) ;
+    /* align-items: center; */
+    border-radius: 5px;
+    padding: 0.4rem;
+    box-sizing: border-box;
+
+}
+#Total-amount{
+    width: 100%;
+    height: 2rem;
+    border: 2px solid gray;
+    color: green;
+    font-size: 0.9em;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 1rem;
+}
+.btn-continue-purchase{
+    height: 3rem;
+    width: 100%;
+    background-color: gray;
+    /* background-color: rgb(6, 118, 6); */
+    border-radius: 20px;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: whitesmoke;
+    margin-top: 1.7rem;
+    cursor: not-allowed;
+
+    
+}
+.activee{
+    background-color: rgb(6, 118, 6);
+    cursor: pointer;
+}
+.btn-continue-purchase active:hover{
+    background-color: rgba(6, 118, 6,0.9);
+}
+
+@media screen and (width <=1500px) {
+    .container-2{
+        justify-content: space-around;
+    }
+    .results-right{
+        margin-left: 0;
+        width: 30%;
+        /* background-color: aquamarine; */
+         
+    }
+    .img-1{
+        width: 100%;
+    }
+
+}
+@media screen and (width <=1150px){
+    .container-2{
+        justify-content: space-around;
+        padding: 0 0;
+    }
+    .results-right{
+        margin-left: 0;
+        width: 30%;
+        /* background-color: aquamarine; */
+         
+    }
+}
+@media screen and (width <=900px) {
+    .img-1{
+        display: none;
+    }
+    .container-2{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        
+    }
+    .results-right{
+        order: -1;
+        position: sticky;
+        top: 0;
+        width: 50%;
+        margin-top: 2%;
+        top: 2%;
+    }
+    .results-left{
+        width: 60%;
+    }
+
+}
+@media screen and (width <=900px) {
+    .img-1{
+        display: none;
+    }
+    .container-2{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        
+    }
+    .results-right{
+        order: -1;
+        position: sticky;
+        top: 0;
+        width: 50%;
+
+        top: 2%;
+    }
+    .results-left{
+        width: 60%;
+    }
+
+    .prev,.next{
+        padding: 5px 10px;
+    }
+    .middle{
+        font-size: 15px;
+    }
+    .modify{
+        width: 10rem;
+        height: 2rem;
+        border-radius: 50px;
+        border: none;
+        color:rgb(201, 133, 7);
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .journey-info{
+        font-size: 1rem;
+        color: rgb(148, 98, 4);
+    }
+    .container-1-element{
+        padding: 0 1%;
+    }
+
+}
+@media screen and (width <=767px) {
+    .img-1{
+        display: none;
+    }
+    .container-2{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        
+    }
+    .results-right{
+        order: -1;
+        position: sticky;
+        top: 0;
+        width: 60%;
+        top: 2%;
+    }
+    .results-left{
+        width: 70%;
+    }
+}
+
+@media screen and (width <=657px) {
+    .img-1{
+        display: none;
+    }
+    .container-2{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        
+    }
+    .results-right{
+        order: -1;
+        /* position: sticky; */
+        top: 0;
+        width: 60%;
+        top: 2%;
+    }
+    .results-left{
+        width: 80%;
+    }
+}
+
+@media screen and (width <=574px) {
+    .img-1{
+        display: none;
+    }
+    .container-2{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        
+    }
+    .results-right{
+        order: -1;
+        position: sticky;
+        top: 0;
+        width: 70%;
+    }
+    .results-left{
+        width: 100%;
+    }
+    .prev,.next{
+        padding: 3px 7px;
+    }
+    .middle{
+        font-size: 12px;
+    }
+    .modify{
+        width: 7rem;
+        height: 2rem;
+        border-radius: 50px;
+        border: none;
+        color:rgb(201, 133, 7);
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .journey-info{
+        font-size: 1rem;
+        color: rgb(148, 98, 4);
+    }
+}
+@media screen and (width <=574px) {
+    .img-1{
+        display: none;
+    }
+    .container-2{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        
+    }
+    .results-right{
+        order: -1;
+        position: sticky;
+        top: 0;
+        width: 70%;
+    }
+    .results-left{
+        width: 100%;
+    }
+    .prev,.next{
+        padding: 3px 3px;
+    }
+    .middle{
+        font-size: 12px;
+    }
+    .modify{
+        width: 6rem;
+        height: 2rem;
+        border-radius: 50px;
+        border: none;
+        color:rgb(201, 133, 7);
+        font-size: 10px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .journey-info{
+        font-size: 1rem;
+        color: rgb(148, 98, 4);
+    }
+     
+}  
