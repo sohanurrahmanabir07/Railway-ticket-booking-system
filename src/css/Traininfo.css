@@ -1,0 +1,15 @@
+.drop{
+    /* width: 700px; */
+    /* height: 50px; */
+    background-color: yellow;
+    
+}
+.ddd{
+    background-color: rgb(23, 129, 222);
+    max-height: 0;
+    overflow: hidden;
+}
+.form{
+    background-color: orange;
+    width: 20%;
+}

@@ -1,0 +1,32 @@
+html,body{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.company{
+    width: 300px;
+    height: 70px;
+    background-color: bisque;
+}
+.company img{
+    width: 100%;
+    height: 100%;
+}
+.footer{
+    width: 100%;
+    height: 150px;
+    background-color:#f6f9ff ;
+    border-top: 3.5px solid green;
+    display:flex ;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    bottom: 0;
+}
+.right-logo{
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: orange;
+}
