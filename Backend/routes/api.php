@@ -18,26 +18,27 @@ use Spatie\FlareClient\Api;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::post('/add_passenger',[Api_Controller::class,'addpassenger']);
-Route::get('/show_passenger',[Api_Controller::class,'show']);
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::post('/add_passenger', [Api_Controller::class, 'addpassenger']);
+Route::get('/show_passenger', [Api_Controller::class, 'show']);
 // Route::post('/add_passenger',[Controller::class,'add_passenger']);
-Route::get('/test', function () {
-    return response()->json(['status' => 'working']);
-});
-Route::post('/finduser',[Api_Controller::class,'login']);
+// Route::get('/test', function () {
+//     return response()->json(['status' => 'working']);
+// });
+// Route::post('/finduser', [Api_Controller::class, 'login']);
 // Route::post('/check_it',[Api_Controller::class,'check']);
-Route::post('/check',[Api_Controller::class,'log']);
-Route::post('/add_it',[Controller::class,'add']);
-Route::get('/add_stations',[Controller::class,'add_station']);
-Route::get('/get_stations',[Api_Controller::class,'get_stations']);
-Route::post('/train_details',[Fetching_Controller::class,'get_train_compartment_class_details']);
-Route::get('/get_booked_seat/{id}',[Fetching_Controller::class,'get_booked_seat']);
+Route::post('/login',[Controller::class,'login']);
+Route::post('/check', [Api_Controller::class, 'log']);
+Route::post('/add_it', [Controller::class, 'add']);
+Route::get('/add_stations', [Controller::class, 'add_station']);
+Route::get('/get_stations', [Api_Controller::class, 'get_stations']);
+Route::post('/train_details', [Fetching_Controller::class, 'get_train_compartment_class_details']);
+Route::get('/get_booked_seat/{id}', [Fetching_Controller::class, 'get_booked_seat']);
 
 
-Route::post('/add_ticket',[Fetching_Controller::class,'add_ticket']);
+Route::post('/add_ticket', [Fetching_Controller::class, 'add_ticket']);
 
 
 // ___________________JWT Token_________________________
@@ -53,17 +54,52 @@ Route::post('/add_ticket',[Fetching_Controller::class,'add_ticket']);
 //   Route::post('get_token',[Controller::class,'token']);
 
 // });
-Route::post('/get_token',[Controller::class,'token']);
+// Route::post('/get_token', [Controller::class, 'token']);
 // Route::get('/refresh',[Controller::class,'refresh']);
 // Route::get('/get_value',[Controller::class,'testing'])->middleware('auth:api');
 
-Route::group([
-    'prefix' => 'auth'
-],function ($router){
-    Route::get('/get_value',[Controller::class,'testing']);
-    Route::get('/refresh',[Controller::class,'refresh']);
+// Route::group([
+//     'middleware' =>  ['api',\App\Http\Middleware\JWTMiddleware::class],
+//     'prefix' => 'auth'
+// ], function ($router) {
+//     Route::get('/get_value', [Controller::class, 'testing']);
+//     Route::post('/refresh', [Controller::class, 'refresh']);
+//     Route::post('/login',[Controller::class,'login']);
+//     Route::post('/logout',[Controller::class,'logout']);
+//     Route::post('/me',[Controller::class,'me']);
+//     Route::post('/add_stations',[Controller::class,'add_station']);
 
-});
+// });
+
+// Route::group([
+//     'middleware'=>['api'],
+//     'prefix'=>'auth'
+// ],
+// function($router){
+//     Route::get('/add_stations',[Controller::class,'add_station']);
+
+// }
+
+// );
+// Route::post('/login',[Controller::class,'login']);
+// Route::get('/hello',function(){
+//     return response()->json([
+//         'message'=>'yes it is'
+//     ]);})->middleware('jwt.verify');
+// Route::post('/refresh', [Controller::class, 'refresh'])->middleware('jwt.verify');
+// Route::post('/login',[Controller::class,'login']);
+// Route::post('/logout',[Controller::class,'logout'])->middleware('jwt.verify');
+// Route::get('/me',[Controller::class,'me'])->middleware('jwt.verify');
+
+
+// Route::get('/again',function()
+// {
+    
+//     return response()->json(auth()->user());
+// })->middleware('jwt.verify');
+
+
+
 
 // Route::post('/hel',[Controller::class,'helllo']);
 

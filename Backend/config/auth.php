@@ -40,6 +40,10 @@ return [
             'driver' => 'jwt',
             'provider' => 'passengers',  // Set to use the 'passengers' provider
         ],
+        'noop' => [
+        'driver' => 'session', // or another non-intrusive driver
+        'provider' => null,
+        ],
     ],
 
     /*

@@ -102,42 +102,42 @@ class Api_Controller extends Controller
 
         
     // }
-    public function login(Request $req) {
-        try {
-            // Check if the user exists by phone
-            $user = DB::select('SELECT * from passenger WHERE phone = ?', [$req->phone]);
+    // public function login(Request $req) {
+    //     try {
+    //         // Check if the user exists by phone
+    //         $user = DB::select('SELECT * from passenger WHERE phone = ?', [$req->phone]);
     
-            // If user exists, validate password using Auth
-            if ($user){
+    //         // If user exists, validate password using Auth
+    //         if ($user){
 
-                if(Auth::attempt(['phone' => $req->phone, 'password' => $req->password])){
-                    return response()->json([
-                        'status' => 200,
-                        'message' => 'Login successful',
-                        'user' => Auth::user()
-                    ]);
-                }else{
-                    return response()->json([
-                        'status' => 200,
-                        'message' => 'password wrong',
-                    ]);
-                }
+    //             if(Auth::attempt(['phone' => $req->phone, 'password' => $req->password])){
+    //                 return response()->json([
+    //                     'status' => 200,
+    //                     'message' => 'Login successful',
+    //                     'user' => Auth::user()
+    //                 ]);
+    //             }else{
+    //                 return response()->json([
+    //                     'status' => 200,
+    //                     'message' => 'password wrong',
+    //                 ]);
+    //             }
                 
-            } else {
-                // If credentials don't match or user doesn't exist, return an error
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'Invalid phone'
-                ], 404);
-            }
-        } catch (\Exception $e) {
-            // Catch the exception and log it
-            return response()->json([
-                'status' => 500,
-                'error' => $e->getMessage()
-            ], 500);
-        }
-    }
+    //         } else {
+    //             // If credentials don't match or user doesn't exist, return an error
+    //             return response()->json([
+    //                 'status' => 404,
+    //                 'message' => 'Invalid phone'
+    //             ], 404);
+    //         }
+    //     } catch (\Exception $e) {
+    //         // Catch the exception and log it
+    //         return response()->json([
+    //             'status' => 500,
+    //             'error' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
     public function check(Request $req){
         $user = DB::select('SELECT * from passenger WHERE phone = ?', [$req->phone]);
         try {

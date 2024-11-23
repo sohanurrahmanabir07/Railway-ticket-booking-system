@@ -85,136 +85,46 @@ class Controller extends BaseController
         }
     }
 
-    public function add_station()
+    
+    public function refresh()
     {
-        function randomTime()
-        {
-            $hour = str_pad(rand(0, 23), 2, '0', STR_PAD_LEFT);
-            $minute = str_pad(rand(0, 59), 2, '0', STR_PAD_LEFT);
-            return "$hour:$minute";
-        }
-
-        // Dhaka District
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Kamalapur', 'Dhaka', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Banani', 'Dhaka', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Cantonment', 'Dhaka', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Gendaria', 'Dhaka', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Airport', 'Dhaka', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Shyampur Baraitala', 'Dhaka', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Tejgaon', 'Dhaka', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Keraniganj', 'Dhaka', randomTime()]);
-
-        // Faridpur District
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Ambikapur', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Amirabad', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Bakhunda', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Boalmari', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Faridpur College', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Faridpur', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Ghorakhali', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Kamarkhali Ghat', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Madhukhali Junction', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Pukhuria', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Shahasrail', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Shatoir', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Talma', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Bhanga', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Bhanga Junction', 'Faridpur', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Nagarkanda', 'Faridpur', randomTime()]);
-
-        // Gopalganj District
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Bayspur', 'Gopalganj', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Kashiani Junction', 'Gopalganj', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Maksudpur', 'Gopalganj', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Gopalganj', 'Gopalganj', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Gobra', 'Gopalganj', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Chandradhigdhalia', 'Gopalganj', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Chapta', 'Gopalganj', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Bhatiapara Ghat', 'Gopalganj', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Choto Bahirbag', 'Gopalganj', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Borasi', 'Gopalganj', randomTime()]);
-        DB::insert('INSERT INTO stations (station_name, location, reach_time) VALUES (?, ?, ?)', ['Mahespur', 'Gopalganj', randomTime()]);
-
-        // Add other districts similarly...
-
-        return response()->json([
-            'message' => 'Stations added successfully'
-        ], 201);
+        return $this->respondWithToken(auth('api')->refresh());
     }
-    public function token(Request $req)
+
+    public function login()
     {
-        // // Find the user by phone number
-        // $user = Passenger::where('phone', $req->phone)->first();
-
-        // Check if user exists and password matches
-        // if (!$user || !Hash::check($req->password, $user->password)) {
-
-        //     return response()->json(['error' => 'Invalid credentials'], 401);
-        // } else {
-
-        //     $token = JWTAuth::fromUser($user);
-
-        //     // Return the token
-        //     return response()->json([
-        //         'token' => $token,
-        //         'user'=>$user,
-        //         'expires_in' => JWTAuth::factory()->getTTL() * 60
-            
-            
-            
-        //     ]);
-        // }
-
         $credentials = request(['phone', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        return response()->json([
-            'token'=>$token,
-            'user'=>$credentials
-        ]);
 
-
+        return $this->respondWithToken($token,$credentials);
     }
-    public function refresh()
+
+
+
+    protected function respondWithToken($token)
     {
-        return $this->respondWithToken(JWTAuth::auth()->refresh());
-
         return response()->json([
-            'message'=>'refreshed',
-            'user'=>auth()->user()
-        ]);
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'user'=>auth()->user(),
+            'expires_in' => auth('api')->factory()->getTTL() * 60
+        ],200);
     }
-    public function testing(){
-        try {
-            $user = JWTAuth::parseToken()->authenticate();
-            if (!$user) {
-                return response()->json(['error' => 'User not found'], 404);
-            }
-            return response()->json([
-                'message' => 'Successful',
-                'user' => $user
-            ]);
-        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-            return response()->json(['error' => 'Token is invalid'], 401);
-        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-            return response()->json(['error' => 'Token has expired'], 401);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Something went wrong'], 500);
-        }
+    public function me()
+    {
+        logger('came here');
+        return response()->json(auth()->user());
+        // return response()->json(['message' => 'Success']);
     }
+    public function logout()
+    {
+        auth()->logout();
 
-    
-
-    // protected function respondWithToken($token)
-    // {
-    //     return response()->json([
-    //         'access_token' => $token,
-    //         'token_type' => 'bearer',
-    //         'expires_in' => auth('api')->factory()->getTTL() * 60
-    //     ]);
-    // }
+        return response()->json(['message' => 'Successfully logged out']);
+    }
 
     
 }

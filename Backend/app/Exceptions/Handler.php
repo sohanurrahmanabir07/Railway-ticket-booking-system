@@ -47,19 +47,40 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+            // Log or report the exception if needed
         });
     }
-    public function render($request, Throwable $exception)
-    {
-        if ($exception instanceof TokenInvalidException) {
-            return response()->json(['error' => 'The token is invalid'], 401);
-        } elseif ($exception instanceof TokenExpiredException) {
-            return response()->json(['error' => 'The token has expired'], 401);
-        } elseif ($exception instanceof JWTException) {
-            return response()->json(['error' => 'Token not provided'], 401);
-        }
 
-        return parent::render($request, $exception);
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Throwable $exception
+     * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    // public function render($request, Throwable $exception)
+    // {
+    //     // Handle JWT-specific exceptions
+    //     if ($exception instanceof TokenInvalidException) {
+    //         return response()->json(['error' => 'The token is invalid'], 401);
+    //     }
+
+    //     if ($exception instanceof TokenExpiredException) {
+    //         return response()->json(['error' => 'The token has expired'], 401);
+    //     }
+
+    //     if ($exception instanceof JWTException) {
+    //         return response()->json(['error' => 'Token not provided'], 401);
+    //     }
+
+    //     // Fallback to the default exception handler for other exceptions
+    //     return parent::render($request, $exception);
+    // }
+    public function render($request, Throwable $e)
+    {
+        if($e instanceof \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException){
+            return response()->json([$e->getMessage()], $e->getStatusCode());
+        }
+        return parent::render($request, $e);
     }
 }
