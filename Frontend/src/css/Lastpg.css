@@ -1,0 +1,53 @@
+.payment{
+    /* background-color: aqua; */
+    width: 60%;
+    margin-top: 20px;
+    padding-left: 10px;
+}
+.payment p{
+    font-size: 13px;
+    color: rgb(24, 91, 24);
+    font-weight: 500;
+}
+.payment h4{
+    font-size: 20px;
+    color: rgb(27, 65, 27);
+    font-weight: 600;
+}
+.payment h5{
+    font-size: 16px;
+    color: rgb(74, 73, 73);
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.payment li{
+    font-size: 12px;
+    color: black;
+    font-weight: 400;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+.payment li a{
+    color: rgb(24, 91, 24);
+    font-weight: 500;
+
+}
+.print_button{
+    margin-top: 40px;
+    background-color:rgb(25, 97, 23);
+    border-radius: 5px
+    ;
+    margin-left: 5px;
+    width: 240px;
+    height: 40px;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+}
+.pay_info{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}

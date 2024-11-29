@@ -110,14 +110,13 @@ class Controller extends BaseController
             'access_token' => $token,
             'token_type' => 'bearer',
             'user'=>auth()->user(),
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'expires_in' => auth('api')->factory()->getTTL() * 20
         ],200);
     }
     public function me()
     {
         logger('came here');
         return response()->json(auth()->user());
-        // return response()->json(['message' => 'Success']);
     }
     public function logout()
     {

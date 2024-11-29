@@ -7,7 +7,7 @@ import Result_train from '../components/result_train'
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { addTrain } from '../components/redux'
+import { addTrain,store } from '../components/redux'
 
 
 export default function Results() {
@@ -21,10 +21,28 @@ export default function Results() {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const loginUser = useSelector((state) => state.var.logged)
+  const redx_selected=useSelector((state)=>state.var.selected)
+  const redx_seat_details=useSelector((state)=>state.var.seat_details)
+  const redx_total_amount=useSelector((state)=>state.var.amount)
+  const state=store.getState().var
 
 
-
-
+  // useEffect(()=>{
+  //   const time=Date.now()/1000
+  //   if(time > state.expirey_time){
+  //     toast.warning('Session has expired redirecting to login')
+  //     setTimeout(() => {
+  //       navigate('/login',{
+  //         state:{
+  //           expirey_message:'Session has expired please login'
+  //         }});
+  //     }, 2000);
+     
+      
+  
+      
+  //   }
+  // })
 
   useEffect(() => {
 
@@ -33,8 +51,8 @@ export default function Results() {
     const search_train = async () => {
       setLoading(true)
       const from_to = {
-        from: home_page_info.from,
-        to: home_page_info.to
+        from: home_page_info?.from,
+        to: home_page_info?.to
       }
       await axios.post('http://127.0.0.1:8000/api/train_details', from_to)
         .then((res) => {
@@ -60,6 +78,11 @@ export default function Results() {
   }, [home_page_info])
 
 
+  useEffect(()=>{
+
+    setSelected(redx_selected)
+    setTotal_Amount(redx_total_amount)
+  },[])
 
   const making_train_data_from_api = (data) => {
     // setLoading(true);
@@ -96,7 +119,7 @@ export default function Results() {
 
       setSelected((prev) => {
 
-        const newBooked = [...prev, loginUser[0].passenger_id, total_amount]
+        const newBooked = [...redx_selected, loginUser[0].passenger_id, total_amount]
         dispatch(addTrain(newBooked))
 
         return newBooked
@@ -112,14 +135,7 @@ export default function Results() {
         navigate('/login')
       }, 1500);
     }
-    // if(loginUser){
-    //   navigate('/passangerinfo')
-    // }else{
-    //   navigate('/login')
-    //   toast.warning('PLease Login First')
-    // }
-    // console.log('loginUser',login)
-    
+   
 
 
 

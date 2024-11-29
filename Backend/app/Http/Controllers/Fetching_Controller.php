@@ -131,6 +131,7 @@ class Fetching_Controller extends Controller
                     ], 404);
                 }
         }
+  
     }
 
 

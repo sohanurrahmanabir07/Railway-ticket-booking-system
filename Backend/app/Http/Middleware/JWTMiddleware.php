@@ -34,11 +34,6 @@ class JWTMiddleware
             }
         }
 
-        // $get=$request->fullUrl();
-        // echo gettype($get);
-        // Log::info('JWTMiddleware reached');
-        // echo  $request->fullUrl();
-
         
 
         return $next($request);

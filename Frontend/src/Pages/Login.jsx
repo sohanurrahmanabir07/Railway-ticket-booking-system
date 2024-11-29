@@ -20,6 +20,7 @@ export default function Login() {
 
   const findUser = useSelector((state) => state.var.logged)
   const selected = useSelector((state) => state.var.selected)
+  const access_token=useSelector((state)=>state.var.access_token)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   useEffect(() => {
@@ -37,18 +38,19 @@ export default function Login() {
     setshowPass(!showPass)
   }
 
-  // const authentication = () => {
+  useEffect(()=>{
+    console.log(location)
+    if(location.state?.expirey_message){
+      toast.error(`${location.state.expirey_message}`,{
+        autoClose:false
+      })
 
-  //   const find = usersData.find((u) => u.phone == number && u.password == password)
-  //   console.log("results", find)
-  //   if (find) {
-  //     dispatch(loginUser(find))
-  //     console.log('After dispatch:', findUser);
-  //     navigate('/')
-  //   } else {
-  //     alert("Not found")
-  //     console.log(usersData)
-  //   }
+      setTimeout(() => {
+        window.history.replaceState(null, document.title, window.location.pathname);
+      }, 100);
+    }
+
+  },[])
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -59,20 +61,32 @@ export default function Login() {
     }
     await api.post('/login', passenger)
       .then((res) => {
+
         if(res.status==200){
           dispatch(logoutUser()) //logouting first 
-          dispatch(loginUser(res.data.user))
+
+          const expire_time=res.data.expires_in
+
+          console.log('expurey time',expire_time)
+          
+          const expire=Math.floor(Date.now()/1000+parseInt(expire_time))
+          
+          dispatch(loginUser({user:res.data.user,expire:expire}))
+          
+
           dispatch(add_access_token(res.data.access_token))
 
-          console.log('store',store.getState())
           navigate('/')
 
-        }else{
+        }
+        else{
+          setLoading(false)
 
           if(res.data.message=='Password is incorrect'){
             toast.error('Incorrect Username or Password',{
               autoClose:false
             })
+            
           }
           else{
             toast.error(<Link to={'/registration'}>User not found Tap to Register!!</Link>,{
@@ -81,11 +95,12 @@ export default function Login() {
           }
 
 
-          setLoading(false)
+          
         }
-        console.log(res)
+  
       })
       .catch((error)=>{
+        setLoading(false)
         if(error.response.status==401){
           toast.error('Incorrect Username or Password',{
             autoClose:false
@@ -137,12 +152,12 @@ export default function Login() {
               <p>Need Help</p>
             </div>
             <div className='login-third-part-input'>
-              <input id='part-input' type="text" value={number} onChange={(e) => setNumber(e.target.value)} placeholder='Enter Number' />
+              <input className='part-input' type="text" value={number} onChange={(e) => setNumber(e.target.value)} placeholder='Enter Number' />
               <div className='password-box'>
-                <input id='part-input' value={password} onChange={(e) => setPassword(e.target.value)} type={`${showPass ? 'text' : 'password'}`} placeholder='Enter Password' />
+                <input className='part-input' value={password} onChange={(e) => setPassword(e.target.value)} type={`${showPass ? 'text' : 'password'}`} placeholder='Enter Password' />
                 <i onClick={handleChange} class="eye fa-regular fa-eye"></i>
               </div>
-              <button className={`login-btn ${regAllow ? 'active-login-btn' : ''}`} disabled={regAllow == false} id='part-input'>
+              <button className={`login-btn part-input ${regAllow ? 'active-login-btn' : ''}`} disabled={regAllow == false} >
 
                 <div id="regi">
                   <p>Login</p>

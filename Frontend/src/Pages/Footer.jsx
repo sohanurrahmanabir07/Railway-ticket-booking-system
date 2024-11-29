@@ -10,7 +10,7 @@ export default function Footer() {
             <div className='company'>
                 <img src="https://eticket.railway.gov.bd/assets/img/home/shohoz-synesis-vincen-jv.webp" alt="" />
             </div>
-            <div>
+            <div id='middle-footer'>
                 <Link to="/">Terms and Conditions | Privacy Policy</Link>
             </div>
 
@@ -20,6 +20,7 @@ export default function Footer() {
                 </div>
                 <div>
                     Bangladesh Railway
+                    <p>নিরাপদ . আরামদায়ক . সাশ্রয়ী</p>
                 </div>
             </div>
 

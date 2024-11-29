@@ -10,10 +10,12 @@ import mastercard from '../assets/logo/mastercard.png'
 import dutchbangla from '../assets/logo/dutch-bangla.png'
 
 import checked from '../assets/logo/checked.png'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast, ToastContainer } from 'react-toastify'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import api from '../components/api'
+import { addTrain, store } from '../components/redux'
 
 
 
@@ -32,10 +34,13 @@ export default function Passanger_info() {
   }, [payment_method])
   // ---------------------------calling  from redux------------------------------------
   const train = useSelector((state) => state.var.train)
+  const dispatch=useDispatch()
   const user = useSelector((state) => state.var.logged)[0]
   const home_page_info = useSelector((state) => state.var.home_page_info)
-  console.log('home page info', home_page_info)
-  console.log('train', train)
+  const redx_total_amount=useSelector((state)=>state.var.amount)
+
+
+console.log('train',train)
   // ---------------------------calling  from redux------------------------------------
   const [passenger_details, setPassenger_Details] = useState([])
   const newDetails = []
@@ -63,7 +68,8 @@ export default function Passanger_info() {
         }
       })
       setPassenger_Details(newDetails);
-      setTotal_Amount(train[train.length - 1]);
+      // setTotal_Amount(train[train.length - 1]);
+      setTotal_Amount(redx_total_amount)
     }
 
   }, [train]); 
@@ -71,7 +77,7 @@ export default function Passanger_info() {
   const handlePassenger_Details = (e, index) => {
     const updatedPassenger_Details = [...passenger_details]
 
-    console.log(train)
+    // console.log(train)
 
     if (e.target.name == 'passenger_type' && passenger_details[index].passenger_type == 'Adult' && e.target.value == 'Child') {
       setTotal_Amount(parseInt(total_amount) - (Math.round(parseInt(train[index][3]) * .667)))
@@ -97,9 +103,11 @@ export default function Passanger_info() {
   }
   const buyTicket= async ()=>{
 
+    const state=store.getState().var
+    console.log(state.access_token)
  
     let flag=false
-    console.log('length',passenger_details)
+    // console.log('length',passenger_details)
     passenger_details.map((item,index)=>{
       if(item.name==''){
         toast.warning(`Passenger ${index+1} detailas not filled`)
@@ -119,6 +127,13 @@ export default function Passanger_info() {
             
           }
 
+          let temp_train=[...train]
+          temp_train.push(pnr)
+
+          dispatch(addTrain(temp_train))
+          
+          
+
 
           let temp_arr={
             'compartment_id':'',
@@ -127,9 +142,6 @@ export default function Passanger_info() {
             'pnr':pnr
           }
           item.map((item2,index2)=>{
-
-
-            console.log('items',item2)
             if(index2==0){
               temp_arr.compartment_id=item2
             }else if(index2==2){
@@ -142,36 +154,67 @@ export default function Passanger_info() {
         }
       })
 
-      console.log('ticket',new_arr)
+      // console.log('ticket',new_arr)
 
-      await axios.post('http://127.0.0.1:8000/api/add_ticket',new_arr)
+      // await axios.post('http://127.0.0.1:8000/api/add_ticket',new_arr)
+      await api.post('/add_ticket',new_arr)
       .then((res)=>{
-        
         if(res.data.status==200){
           toast.success('Ticket Successfully purchased',{
             autoClose:false
           })
 
           setTimeout(()=>{
-            toast.success('Taking to home page')
+            navigate('/ticket_purchased')
           },1500)
 
-          setTimeout(() => {
-            navigate('/')
-          }, 2000);
-          
         }
         
-        console.log('response',res)})
+      })
       .catch((error)=>{
-
-        if(error.data.status==404){
-          toast.error('Couldnt purchase check console',{
+        console.log(error.response.status)
+        if(error.response.status==401 || error.response.status==403){
+          toast.error('Session Unauthorized',{
             autoClose:false
           })
+
+          setTimeout(() => {
+            navigate('/login')
+          }, 1500);
+        }else{
+          toast.warning('Token has Expired wait for Extension')
+
+          const  refresh_token=async()=>{
+            await api.post('/refresh')
+            .then((res)=>{
+              if(res.response.status==200){
+                api.post('/add_ticket',new_arr)
+                .then((res)=>{
+                  
+                  if(res.data.status==200){
+                    toast.success('Ticket Successfully purchased',{
+                      autoClose:false
+                    })
+          
+                    setTimeout(()=>{
+                      navigate('/ticket_purchased')
+                    },1500)
+          
+                    
+                  }
+                  
+                  
+                })
+                .catch((error)=>{
+                  toast.error('Something went wrong')
+                })
+                
+              }
+            })
+          }
+         
         }
         
-        console.log('error',error)
 
 
       })
@@ -197,7 +240,7 @@ export default function Passanger_info() {
                     <div key={index} className='passenger-details'>
                       <h4>Passanger {index + 1}</h4>
                       <p>Name *</p>
-                      <input disabled name='name' id='input_field'  value={user.first_name + ' ' + user.sur_name} />
+                      <input disabled name='name' id='input_field'  value={user?.first_name + ' ' + user?.sur_name} />
                       <p>Passenger Type</p>
                       <select  id='input_field'  disabled value={passenger_details[index]?.passenger_type || ''} name='passenger_type' className='passenger-type' >
                         <option value="Adult">Adult</option>

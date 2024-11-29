@@ -113,7 +113,7 @@ export default function Result_train(props) {
                                             <p>Available Tickets <br />
                                                 (Counter + Online)</p>
                                             <h3 id='greeen'></h3>
-                                            <button className='class-btn' onClick={() =>{ setDekhao(true); seat(trainID,class_name) }}>BOOK NOW</button>
+                                            <button className='class-btnn' onClick={() =>{ setDekhao(true); seat(trainID,class_name) }}>BOOK NOW</button>
                                         </div>
                                     </div>
                                 )

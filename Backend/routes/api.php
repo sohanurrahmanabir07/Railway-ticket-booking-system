@@ -38,7 +38,7 @@ Route::post('/train_details', [Fetching_Controller::class, 'get_train_compartmen
 Route::get('/get_booked_seat/{id}', [Fetching_Controller::class, 'get_booked_seat']);
 
 
-Route::post('/add_ticket', [Fetching_Controller::class, 'add_ticket']);
+Route::post('/add_ticket', [Fetching_Controller::class, 'add_ticket'])->middleware('jwt.verify');
 
 
 // ___________________JWT Token_________________________
@@ -89,7 +89,7 @@ Route::post('/add_ticket', [Fetching_Controller::class, 'add_ticket']);
 // Route::post('/refresh', [Controller::class, 'refresh'])->middleware('jwt.verify');
 // Route::post('/login',[Controller::class,'login']);
 // Route::post('/logout',[Controller::class,'logout'])->middleware('jwt.verify');
-// Route::get('/me',[Controller::class,'me'])->middleware('jwt.verify');
+Route::get('/me',[Controller::class,'me']);
 
 
 // Route::get('/again',function()

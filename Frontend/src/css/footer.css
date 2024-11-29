@@ -4,9 +4,7 @@ html,body{
     flex-direction: column;
 }
 .company{
-    width: 300px;
-    height: 70px;
-    background-color: bisque;
+    width: 15%;
 }
 .company img{
     width: 100%;
@@ -14,14 +12,16 @@ html,body{
 }
 .footer{
     width: 100%;
-    height: 150px;
+    /* height: 150px; */
     background-color:#f6f9ff ;
-    border-top: 3.5px solid green;
+    border-top: 2px solid green;
     display:flex ;
     justify-content: space-around;
     align-items: center;
     position: relative;
     bottom: 0;
+    box-sizing: border-box;
+    padding: 0.5% 0;
 }
 .right-logo{
     display: flex;
@@ -29,4 +29,68 @@ html,body{
     font-size: 1.5em;
     font-weight: 600;
     color: orange;
+}
+.right-logo div p{
+    font-size: small;
+    color: gray;
+    margin-top: 6px;
+}
+#middle-footer a{
+    text-decoration: none;
+    color: black;
+}
+#middle-footer a:hover{
+    text-decoration: dotted;
+}
+
+@media screen and (width <= 1024px) {
+
+
+    .company{
+        width: 25%;
+    }
+
+
+}
+@media screen and (width <= 903px) {
+
+
+    .company{
+        width: 25%;
+    }
+
+    #middle-footer a{
+        font-size: 0.95em;
+    }
+    .right-logo img{
+        width: 95%;
+    }
+    .right-logo{
+        font-size: 1.1em ;
+    }
+
+
+}
+@media screen and (width <= 761px) {
+
+    .footer{
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: space-between;
+        height: 40vh;
+    }
+    .company{
+        width: 45%;
+
+    }
+
+
+}
+@media screen and (width <= 429px) {
+
+    .company{
+        width: 60%;
+    }
+
+
 }

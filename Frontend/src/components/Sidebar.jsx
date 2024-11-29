@@ -7,7 +7,7 @@ export default function Sidebar(props) {
     const {userData,profile,showSidebar,setshowSidebar}=props
     let name = ''
     if (userData) {
-        console.log("user", userData)
+        // console.log("user", userData)
         name = userData.first_name + ' ' + userData.sur_name
 
     } 
