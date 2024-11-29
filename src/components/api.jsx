@@ -14,10 +14,10 @@ const api = axios.create({
 // const dispatch=useDispatch()
 
 api.interceptors.request.use(config => {
-    // const state=store.getState().var
-    // const token=state.access_token
+    const state=store.getState().var
+    const token=state.access_token
 
-    const token='yJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzMyMjk2MTc3LCJleHAiOjE3MzIyOTk3NzcsIm5iZiI6MTczMjI5NjE3NywianRpIjoiTEhTMUJzc0E4Skk2angwbSIsInN1YiI6IjEiLCJwcnYiOiI0YzZmZWZiMzEzNzA2Y2UzNTI1ODRiNjE3N2ZlYWZmNWExNDZkMmY5In0.d-93KZaoY500MdIwAcYYl-WFNattMFUUuKogKgfDbhQ'
+    // const token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzMyMzk4NzYxLCJleHAiOjE3MzI0MDIzNjEsIm5iZiI6MTczMjM5ODc2MSwianRpIjoiYUhjQW1XV2JWZ25mY0ZxcSIsInN1YiI6IjEiLCJwcnYiOiI0YzZmZWZiMzEzNzA2Y2UzNTI1ODRiNjE3N2ZlYWZmNWExNDZkMmY5In0.rWwVM_DLjzM0DSGfaHtZN-bI9nysKnZsi9o7XMc-gjA'
 
 
 

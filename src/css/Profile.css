@@ -1,0 +1,182 @@
+body{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+
+}
+.profile-infoo{
+    margin-top: 20px;
+    width: 55%;
+}
+.profile-infoo{
+    color: black;
+    margin-left: 22.3%;
+    font-size: 22px;
+
+}
+hr{
+    
+    width: 100%;
+}
+.inputs{
+    background-color: rgb(255, 255, 255);
+    width: 55%;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    gap: 20px;
+    box-sizing: border-box;
+}
+.input p{
+    font-size: 12px;
+    color: grey;
+}
+
+.place p{
+    font-size: 14px;
+    font-weight: 600;
+    color: black;
+}
+.edit_button{
+    width: 180px;
+    margin-top: 20px;
+    height: 40px;
+    border-radius: 10px;
+    color: white;
+    margin-left: 22.3%;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: rgb(16, 91, 56);
+}
+.cancel_button{
+    /* width: 180px;
+    margin-top: 20px;
+    margin-left: 30px; */
+    /* height: 40px; 
+    border-radius: 10px;
+    color: rgb(19, 95, 19);
+    font-weight: 500;
+    padding: 0.3% 1.5%;*/ 
+    width: 180px;
+    margin-top: 20px;
+    margin-left: 3%;
+    height: 40px;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: rgb(16, 91, 56);
+    
+}
+.id_verified{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.veri p{
+    width: 80px;
+    padding-left: 10px;
+    font-size: 14px;
+    background-color: rgb(72, 233, 99);
+    color:white;
+    border-radius: 10px;
+    font-weight: 600;
+
+}
+.place_input input{
+    padding-left: 5px;
+    /* background-color: rgb(159, 96, 19); */
+    width: 260px;
+    height: 32px;
+    /* color: aqua; */
+    /* border-radius: 10px; */
+    
+}
+.place_input p{
+    font-size: 11px;
+    margin-top: 5px;
+    color: red;
+}
+.place_input input::placeholder{
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.place input{
+    width: 260px;
+    height: 32px;
+}
+.place input::placeholder{
+    color: black;
+    padding-left: 5px;
+    font-weight: 500;
+    font-size: 15px;
+}
+.place_all input{
+    width: 260px;
+    height: 32px;
+}
+.place_all input::placeholder{
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+    padding-left: 5px;
+}
+.place_add input{
+    width: 380px;
+    height: 70px;
+
+}
+.place_add p{
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+    padding-left: 5px;
+}
+.place_add input::placeholder{
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+    padding-left: 5px;
+
+}
+
+@media screen and (max-width: 576px) {
+    .inputs{
+        background-color: rgb(255, 255, 255);
+        width: 80%;
+        margin-top: 5px;
+    }
+    .edit_button{
+        width: 100px;
+        margin-top: 10px;
+        height: 40px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        color: white;
+        margin-left: 10%;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        background-color: rgb(16, 91, 56);
+    }
+    .profile h3{
+        color: black;
+        margin-left: 12%;
+        font-size: 20px;
+    
+    }
+    .place_add input{
+        width: 300px;
+        height: 60px;
+    
+    }
+
+}

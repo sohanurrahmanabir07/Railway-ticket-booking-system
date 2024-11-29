@@ -82,9 +82,11 @@ export default function Seat_selection(props) {
   const clear_all_selected_seats = () => {
     setSelected([])
     setSeat_Details([])
+    dispatch(clear_all_selected_seats())
     setTotal_Amount(0)
 
   }
+
 
 
 
@@ -97,7 +99,9 @@ export default function Seat_selection(props) {
 
           setSelected((prevValue) => [...prevValue, key])
           setSeat_Details((prev) => [...prev, key])
+          dispatch(insert_selected(key))
           setTotal_Amount((prev) => prev + parseInt(key[3]))
+
 
         } else {
 
@@ -120,6 +124,8 @@ export default function Seat_selection(props) {
       } else {
         setSelected((prevValue) => [...prevValue, key])
         setSeat_Details((prev) => [...prev, key])
+        dispatch(insert_selected(key))
+        
 
         setTotal_Amount((prev) => prev + parseInt(key[3]))
 
@@ -134,11 +140,12 @@ export default function Seat_selection(props) {
       const newBooked = selected.filter((item) => !(item[0] == key[0] && item[2] == key[2]))
       setSelected(newBooked)
       setSeat_Details(newBooked)
+      dispatch(clear_selected(key))
       setTotal_Amount((prev) => prev - parseInt(key[3]))
 
 
     }
-    console.log('selecetd seaet',selected)
+    // console.log('selecetd seaet',selected)
 
 
 

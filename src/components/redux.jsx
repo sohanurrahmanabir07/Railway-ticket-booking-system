@@ -11,8 +11,12 @@ const initialState = {
     train: [],
     selected_exist: null,
     selected: [],
+    seat_details:[],
+    amount:0,
+    expirey_time:null,
     access_token:null,
-    refresh_token:null
+    refresh_token:null,
+    message:null
 
 
 
@@ -27,7 +31,12 @@ const variable =
             state.home_page_info = action.payload
         },
         loginUser: (state, action) => {
-            state.logged.push(action.payload)
+            const {user,expire}=action.payload
+            state.logged.push(user)
+            state.expirey_time=expire
+
+
+
         },
         logoutUser: (state, action) => {
 
@@ -35,6 +44,11 @@ const variable =
             state.access_token=null
             state.user=[]
             state.home_page_info = null
+            state.selected=[]
+            state.amount=null
+            state.expirey_time=null
+            state.message=null
+            
 
         },
         addUser: (state, action) => {
@@ -45,23 +59,31 @@ const variable =
         },
         addTrain:(state,action)=>{
             state.train=action.payload
+            console.log('from redux',state.train)
         },
         showDetails: (state, action) => {
             return state.journey_inf
 
         },
         insert_selected:(state,action)=>{
-           state.selected=action.payload
+            const key=action.payload
+           state.selected.push(action.payload)
+           state.seat_details.push(action.payload)
+           state.amount+=parseInt(key[3])
         },
         clear_selected:(state,action)=>{
             const key=action.payload
             const new_selected=state.selected.filter((item)=> !(item[0]==key[0] && item[2]==key[2]) )
+            const new_seat_details=state.seat_details.filter((item)=> !(item[0]==key[0] && item[2]==key[2]))
             state.selected=new_selected
-            // console.log("removed",state.selected)
+            state.seat_details=new_seat_details
+            state.amount-=parseInt(key[3])
+
         },
         clear_all_selected:(state,action)=>{
             state.selected=[]
-            // console.log('insert selected cleared',state.selected)
+            state.seat_details=[]
+            state.amount=0
         },
         add_access_token:(state,action)=>{
             state.access_token=action.payload

@@ -4,7 +4,14 @@ import { useSelector } from 'react-redux'
 import '../css/home.css'
 import { toast, ToastContainer } from 'react-toastify'
 import Dropdwon from '../components/dropdwon'
+import { store } from '../components/redux'
+import { useLocation, useNavigate } from 'react-router-dom'
 export default function Home() {
+
+  const state=store.getState().var
+  const navigate=useNavigate()
+  const location=useLocation()
+  const time=Date.now()/1000
 
 
 
@@ -15,7 +22,6 @@ export default function Home() {
 
         <div className='first-container' >
           <div id='train_searching'> <Trainsearching /></div>
-          {/* <Trainsearching /> */}
           <div className='image-train'><img src="https://bangladesh-railway.s3-ap-southeast-1.amazonaws.com/production/content-media/BDRAILWAY_TICKET66d3b68a83b1c4cc05aa5b8d1ab3b7ec.jpg" alt="" /></div>
         </div>
 
@@ -46,7 +52,6 @@ export default function Home() {
           </div>
 
         </div>
-        {/* <Dropdwon/> */}
 
       </div>
 

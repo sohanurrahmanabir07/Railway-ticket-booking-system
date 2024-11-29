@@ -1,0 +1,36 @@
+.journey p{
+
+padding: 4% 5%;
+}
+.journey h5{
+   
+padding: 4% 5%;
+font-size: large;
+}
+.journey table {
+   border: 1px solid gray;
+   border-collapse: collapse; 
+}
+
+.journey table tr {
+   border: 1px solid gray;
+}
+.journey table{
+   margin-top: 10px;
+}
+.journey table h5{
+   font-weight: 700;
+   padding-left: 5px;
+   color: rgb(35, 94, 35);
+}
+@media screen and (max-width: 576px) {
+   .journey table {
+       margin-bottom: 5px;
+       margin-top: 5px;
+
+   }
+   .journey p{
+       padding-right: 5px;
+   }
+   
+}

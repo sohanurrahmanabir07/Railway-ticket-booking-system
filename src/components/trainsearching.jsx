@@ -81,7 +81,7 @@ export default function Trainsearching() {
                             <div className='input-div'>
                                 <label htmlFor="">From</label> <br />
                                 <input type="text" id="input-field" value={from} onChange={(e) => { setFrom(e.target.value); setShow1(true); }} />
-                                {from && show1 ? <div style={{ minWidth: 265, backgroundColor: 'white',borderRadius:3, zIndex: 1, position: 'absolute', color: 'black',border:'0.5px solid gray'}} >
+                                {from && show1 ? <div  id='search-result'  >
                                     {
                                         searchresult.slice(0, 4).map((item,index) => (
                                             <li  key={index} style={{ cursor: 'pointer' }} onClick={() => { setShow1(false); setFrom(item.station_name) }}>{item.station_name}</li>
@@ -93,7 +93,7 @@ export default function Trainsearching() {
                             <div className='input-div'>
                                 <label htmlFor="">To</label><br />
                                 <input type="text" id="input-field" value={to} onChange={(e) => { setTo(e.target.value); setShow2(true); }} />
-                                {to && show2 ? <div style={{ minWidth: 265, backgroundColor: 'white',borderRadius:3, zIndex: 1, position: 'absolute',border:'0.5px solid gray'}} >
+                                {to && show2 ? <div id='search-result'  >
                                     {
                                         searchresult2.slice(0, 4).map((item,index) => (
                                             <li key={index} style={{ cursor: 'pointer' }} onClick={() => { setShow2(false); setTo(item.station_name) }}>{item.station_name}</li>
@@ -102,7 +102,7 @@ export default function Trainsearching() {
 
                             </div>
                         </div>
-                        <div>
+
                             <div className='date-class'>
                                 <div className='input-div'>
                                     <label htmlFor="">Date</label> <br />
@@ -126,7 +126,6 @@ export default function Trainsearching() {
                                 <button className={`btn-click ${enble_btn? 'btn-active':''}`} disabled={enble_btn==false} >Search</button>
                             </div>
 
-                        </div>
 
 
                     </div>

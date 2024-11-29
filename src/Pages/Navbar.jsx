@@ -20,13 +20,12 @@ export default function Navbar() {
   const navigate = useNavigate()
   let name = ''
   if (userData) {
-    console.log("user", userData)
     name = userData.first_name + ' ' + userData.sur_name
 
   } else {
-    console.log("nothing", temp)
+    // console.log("nothing", temp)
   }
-  console.log('show', showNav)
+  // console.log('show', showNav)
 
   const profile = (
     <>
@@ -35,18 +34,18 @@ export default function Navbar() {
         <i className={`fa-solid fa-caret-down ${showNav ? 'rotate' : ''}`}></i>
       </div>
 
-      {showNav ? <div className='dropdown2'> <Dropdwon />  </div> : ''}
+      {showNav ? <div className='dropdown2'><Dropdwon  showNav={showNav} setShowNav={setShowNav} /> </div> : ''}
     </>
 
   )
 
   const handleSidebar=(e)=>{
     setshowSidebar(!showSidebar)
-    if(Ref_nav.current.contains(e.target)){
-      console.log('inside')
-    }else{
-      console.log('outside')
-    }
+    // if(Ref_nav.current.contains(e.target)){
+    //   console.log('inside')
+    // }else{
+    //   console.log('outside')
+    // }
 
   }
 
@@ -74,7 +73,7 @@ export default function Navbar() {
                 <i className={`fa-solid fa-caret-down ${showNav ? 'rotate' : ''}`}></i>
               </div>
 
-              {showNav ? <div className='dropdown'> <Dropdwon />  </div> : ''}
+              {showNav ? <div className='dropdown'> <Dropdwon  showNav={showNav} setShowNav={setShowNav} />  </div> : ''}
             </div>
           ) : ''}
 

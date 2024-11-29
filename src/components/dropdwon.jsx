@@ -3,11 +3,12 @@ import '../Pages/navbar.css'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { clear_access_token, clear_all_selected, logoutUser, persistor } from '../components/redux';
-export default function Dropdwon() {
+export default function Dropdwon({ setShowNav, showNav }) {
   const navigate=useNavigate()
   const dispatch=useDispatch()
   const userData=useSelector((state)=>state.var.logged)[0]
   const name=userData.first_name+' '+userData.sur_name
+
 
   const Logout=()=>{
     dispatch(logoutUser())
@@ -28,7 +29,15 @@ export default function Dropdwon() {
               <span>{userData.phone}</span>
             </div>
             <hr />
-            <div className='dropdown-element'>
+            <div className='dropdown-element' onClick={()=>{
+              setShowNav(false);
+              navigate('/profile');
+              
+
+              
+             
+              
+              }} >
               <span><i class="fa-solid fa-user"></i></span>
               <span>Profile</span>
             </div>

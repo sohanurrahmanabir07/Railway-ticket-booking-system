@@ -152,26 +152,26 @@ export default function Registration() {
                         <br />
                         <div className='login-third-part-input'>
                             <div className='firstname-surname'>
-                                <input id='part-input' name='first_name' type="text" value={user.first_name} onChange={handleForm} placeholder='Enter First Name' />
-                                <input id='part-input' name='sur_name' type="text" value={user.sur_name} onChange={handleForm} placeholder='Enter Surname' />
+                                <input className='part-input' name='first_name' type="text" value={user.first_name} onChange={handleForm} placeholder='Enter First Name' />
+                                <input className='part-input' name='sur_name' type="text" value={user.sur_name} onChange={handleForm} placeholder='Enter Surname' />
 
                             </div>
 
-                            <input id='part-input' name='phone' type="text" value={user.phone} onChange={handleForm} placeholder='Enter Phone ' />
-                            <input id='part-input' name='email' type="text" value={user.email} onChange={handleForm} placeholder='Enter Email' />
-                            <input id='part-input' name='address' type="text" value={user.address} onChange={handleForm} placeholder='Enter Adderss' />
-                            <input id='part-input' name='date_of_birth' type="text" value={user.date_of_birth} onChange={handleForm} placeholder='Enter Date of Birth' />
-                            <input id='part-input' name='nid' type="text" value={user.nid} onChange={handleForm} placeholder='Enter NID/ Birth Certificate' />
+                            <input  className='part-input'  name='phone' type="text" value={user.phone} onChange={handleForm} placeholder='Enter Phone ' />
+                            <input   className='part-input'  name='email' type="text" value={user.email} onChange={handleForm} placeholder='Enter Email' />
+                            <input   className='part-input' name='address' type="text" value={user.address} onChange={handleForm} placeholder='Enter Adderss' />
+                            <input className='part-input' name='date_of_birth' type="text" value={user.date_of_birth} onChange={handleForm} placeholder='Enter Date of Birth' />
+                            <input  className='part-input' name='nid' type="text" value={user.nid} onChange={handleForm} placeholder='Enter NID/ Birth Certificate' />
                             <div className='password-box'>
-                                <input id='part-input' value={passwordd} onChange={(e) => setPassword(e.target.value)} type={`${showPass ? 'text' : 'password'}`} placeholder='Enter Password' />
+                                <input className='part-input' value={passwordd} onChange={(e) => setPassword(e.target.value)} type={`${showPass ? 'text' : 'password'}`} placeholder='Enter Password' />
                                 <i onClick={handleChange} class="eye fa-regular fa-eye"></i>
                             </div>
                             <div className='password-box'>
-                                <input id='part-input' value={re_write_password} onChange={(e) => setRepassword(e.target.value)} type={`${showPass ? 'text' : 'password'}`} placeholder='Re-writePassword' />
+                                <input className='part-input' value={re_write_password} onChange={(e) => setRepassword(e.target.value)} type={`${showPass ? 'text' : 'password'}`} placeholder='Re-writePassword' />
                                 <i onClick={handleChange} class="eye fa-regular fa-eye"></i>
                             </div>
 
-                            <button className={`login-btn ${regAllow ? 'active-login-btn' : ''}`} disabled={regAllow == false} id='part-input'>
+                            <button className={`login-btn ${regAllow ? 'active-login-btn' : ''}`} disabled={regAllow == false} className='part-input'>
 
                                 <div id="regi">
                                     <p>Register</p>
