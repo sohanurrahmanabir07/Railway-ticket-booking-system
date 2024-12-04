@@ -52,11 +52,11 @@ class Fetching_Controller extends Controller
             return response()->json([
                 'status' => 200,
                 'data' => $train_details
-            ]);
+            ],200);
         } else {
             return response()->json([
                 'status' => 404,
-            ]);
+            ],201);
         }
     }
     public function get_booked_seat($id)
@@ -156,5 +156,45 @@ class Fetching_Controller extends Controller
             $data[$i] = (array) $data[$i];
         }
         print_r($data);
+    }
+    public function get_train_info(){
+        $train_info=DB::select('SELECT train_id,train_name from train_info' );
+        
+        if($train_info){
+            return response()->json([
+                'train_info'=>$train_info
+            ],200);
+        }else{
+            return response()->json([
+ 
+            ],400);
+        }
+        
+    }
+    public function train_route($train_id){
+        $train_route_details=DB::select(
+            'SELECT ti.train_name,ti.train_id, s.station_name,ts.reach_time,ts.station_number from train_station as ts
+            
+            JOIN train_info as ti ON ts.train_id=ti.train_id 
+            
+            JOIN stations as s  ON ts.station_id=s.station_id
+
+            WHERE ts.train_id=? ORDER BY ts.station_number ASC
+            
+            ',[$train_id]
+            
+            
+            
+        );
+
+        if($train_route_details){
+            return response()->json([
+                'train'=>$train_route_details
+            ],200);        
+        }else{
+            return response()->json([
+                'message'=>'Not Found'
+            ],201);    
+        }
     }
 }

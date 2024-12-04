@@ -11,7 +11,6 @@ export default function Home() {
   const state=store.getState().var
   const navigate=useNavigate()
   const location=useLocation()
-  const time=Date.now()/1000
 
 
 

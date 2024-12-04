@@ -7,7 +7,7 @@ import Result_train from '../components/result_train'
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { addTrain,store } from '../components/redux'
+import { addTrain, store } from '../components/redux'
 
 
 export default function Results() {
@@ -21,10 +21,10 @@ export default function Results() {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const loginUser = useSelector((state) => state.var.logged)
-  const redx_selected=useSelector((state)=>state.var.selected)
-  const redx_seat_details=useSelector((state)=>state.var.seat_details)
-  const redx_total_amount=useSelector((state)=>state.var.amount)
-  const state=store.getState().var
+  const redx_selected = useSelector((state) => state.var.selected)
+  const redx_seat_details = useSelector((state) => state.var.seat_details)
+  const redx_total_amount = useSelector((state) => state.var.amount)
+  const state = store.getState().var
 
 
   // useEffect(()=>{
@@ -37,10 +37,10 @@ export default function Results() {
   //           expirey_message:'Session has expired please login'
   //         }});
   //     }, 2000);
-     
-      
-  
-      
+
+
+
+
   //   }
   // })
 
@@ -56,12 +56,22 @@ export default function Results() {
       }
       await axios.post('http://127.0.0.1:8000/api/train_details', from_to)
         .then((res) => {
-          const data = res.data.data
-          const { train_class_info, info } = making_train_data_from_api(data)
-          setTrain_Name_Class(train_class_info)
-          setAll_info(data)
+
+          if (res.status == 200) {
+            const data = res.data.data
+            const { train_class_info, info } = making_train_data_from_api(data)
+            setTrain_Name_Class(train_class_info)
+            setAll_info(data)
+          }else{
+            console.log(res)
+            toast.error('No Train Found')
+          }
         })
+
+
+          
         .catch((error) => {
+
           toast.warning('Data Unavailable')
           setTrain_Name_Class({})
           setLoading(false)
@@ -78,11 +88,11 @@ export default function Results() {
   }, [home_page_info])
 
 
-  useEffect(()=>{
+  useEffect(() => {
 
     setSelected(redx_selected)
     setTotal_Amount(redx_total_amount)
-  },[])
+  }, [])
 
   const making_train_data_from_api = (data) => {
     // setLoading(true);
@@ -115,7 +125,7 @@ export default function Results() {
 
 
 
-    if ((loginUser).length>0 && selected[(selected.length) - 1].length > 2) {
+    if ((loginUser).length > 0 && selected[(selected.length) - 1].length > 2) {
 
       setSelected((prev) => {
 
@@ -127,15 +137,7 @@ export default function Results() {
       })
       navigate('/passangerinfo')
 
-    }else{
-      
-      toast.warning('PLease Login First')
-
-      setTimeout(() => {
-        navigate('/login')
-      }, 1500);
-    }
-   
+    } 
 
 
 

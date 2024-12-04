@@ -36,9 +36,10 @@ Route::get('/add_stations', [Controller::class, 'add_station']);
 Route::get('/get_stations', [Api_Controller::class, 'get_stations']);
 Route::post('/train_details', [Fetching_Controller::class, 'get_train_compartment_class_details']);
 Route::get('/get_booked_seat/{id}', [Fetching_Controller::class, 'get_booked_seat']);
-
-
+Route::get('/get_train_info',[Fetching_Controller::class,'get_train_info']);
+Route::get('/get_train_route/{train_id}',[Fetching_Controller::class,'train_route']);
 Route::post('/add_ticket', [Fetching_Controller::class, 'add_ticket'])->middleware('jwt.verify');
+
 
 
 // ___________________JWT Token_________________________
