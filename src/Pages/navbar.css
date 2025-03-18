@@ -6,11 +6,12 @@
 .navbar{
 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0 5%;
     border-bottom: 2px solid rgb(177, 175, 175);
     padding: 0 5%;
     align-items: center;
+    background-color: white;
     /* position: relative; */
 
     /* width: 100vw; */
@@ -20,17 +21,20 @@
 .navbar li{
     list-style: none;
     text-align: center;
+    
 }
 .navbar ul{
     display: flex;
     margin-right: 10rem;
+   
 }
 .navbar ul li{
-    margin-right: 50px;
+    /* margin-right: 50px; */
     font-size: 1.4em;
     margin: 0;
     font-weight: 600;
     color: rgb(65, 63, 63);
+    width: fit-content;
     
     
 
@@ -46,6 +50,7 @@
 .navbar ul .active{
     border-bottom: 3px solid rgb(72, 70, 70);
     display: block;
+    width: fit-content;
    
 }
 

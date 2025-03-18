@@ -39,7 +39,9 @@ function Maincontent() {
     }
 
     if( state.expirey_time!=null &&  time > state.expirey_time){
-      toast.warning('Session has expired redirecting to login')
+      toast.warning('Session has expired redirecting to login',{
+        closeButton:true
+      })
       setTimeout(() => {
         navigate('/login',{
           state:{
@@ -66,19 +68,19 @@ function Maincontent() {
         <Route path='/choose_seat/:id' element={<Choose_seat />} />
         <Route path='/booking' element={<Bookinfo />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/Contact' element={<Protected><Contact /></Protected> } />
-        <Route path='/Traininfo' element={<Protected><Traininfo /></Protected>    } />
+        {/* <Route path='/Contact' element={<Contact/>} /> */}
+        <Route path='/Traininfo' element={<Traininfo/>} />
         <Route path='/registration' element={<Registration />} />
         <Route path='/passangerinfo' element={<Protected><Passanger_info /></Protected>}/>
         <Route path='/login' element={<Login />} />
         <Route path='/registration' element={<Registration />} />
         <Route path='/practice' element={<Practice />} />
         {/* <Route path='/ticket_purchased'  element={<Protected><Lastpg /></Protected>} /> */}
-        <Route path='/ticket_purchased'  element={<Lastpg />} />
-        <Route path='/profile' element={<Profile/>}  />
+        <Route path='/ticket_purchased'  element={<Protected><Lastpg /></Protected>} />
+        <Route path='/profile' element={ <Protected> <Profile/></Protected> }  />
         {/* <Route path='*' element={}  /> */}
       </Routes>
-      {(location.pathname != '/login' && location.pathname != '/registration') && <Footer />}
+      {(location.pathname != '/login' && location.pathname != '/registration')  && <Footer />}
 
     </>
   );

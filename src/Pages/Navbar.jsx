@@ -62,6 +62,7 @@ export default function Navbar() {
           <NavLink to={'/'}> <li>Home</li>  </NavLink>
           <NavLink to={'/Traininfo'}> <li>Train Information</li> </NavLink>
           <NavLink to={'/Contact'}> <li>Contact Us</li></NavLink>
+          
           {!userData ? <NavLink to={'/login'}> <li>Login</li>  </NavLink> : ''}
 
         </ul>

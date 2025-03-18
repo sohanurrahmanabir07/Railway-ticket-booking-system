@@ -34,50 +34,55 @@ export default function Passanger_info() {
   }, [payment_method])
   // ---------------------------calling  from redux------------------------------------
   const train = useSelector((state) => state.var.train)
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
   const user = useSelector((state) => state.var.logged)[0]
   const home_page_info = useSelector((state) => state.var.home_page_info)
-  const redx_total_amount=useSelector((state)=>state.var.amount)
+  const redx_total_amount = useSelector((state) => state.var.amount)
 
 
-console.log('train',train)
+  console.log('train', train)
   // ---------------------------calling  from redux------------------------------------
   const [passenger_details, setPassenger_Details] = useState([])
   const newDetails = []
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
 
   useEffect(() => {
 
-    if(train && train.length>0){
-      train.map((item,index)=>{
-        if(item.length>2 && index==0){
-          const temp={
-            'name':`${user.first_name+' '+user.sur_name}`,
-            'passenger_type':'Adult'
-            
+    if (train && train.length > 0) {
+      train.map((item, index) => {
+        if (typeof (item) == 'object') {
+          if (item.length > 2 && index == 0) {
+            const temp = {
+              'name': `${user.first_name + ' ' + user.sur_name}`,
+              'passenger_type': 'Adult'
+
+            }
+            newDetails.push(temp)
+          } else if (item.length > 2 && index != 0) {
+            const temp = {
+              'name': '',
+              'passenger_type': 'Adult'
+
+            }
+            newDetails.push(temp)
           }
-          newDetails.push(temp)
-        }else if(item.length>2 && index!=0){
-          const temp={
-            'name':'',
-            'passenger_type':'Adult'
-            
-          }
-          newDetails.push(temp)
         }
+
       })
       setPassenger_Details(newDetails);
       // setTotal_Amount(train[train.length - 1]);
       setTotal_Amount(redx_total_amount)
     }
 
-  }, [train]); 
+  }, []);
 
   const handlePassenger_Details = (e, index) => {
     const updatedPassenger_Details = [...passenger_details]
 
-    // console.log(train)
+    console.log('initially passenger details', passenger_details)
+
+
 
     if (e.target.name == 'passenger_type' && passenger_details[index].passenger_type == 'Adult' && e.target.value == 'Child') {
       setTotal_Amount(parseInt(total_amount) - (Math.round(parseInt(train[index][3]) * .667)))
@@ -86,77 +91,83 @@ console.log('train',train)
     }
 
 
+    // updatedPassenger_Details[index] = { ...updatedPassenger_Details[index], [e.target.name]: e.target.value }
     updatedPassenger_Details[index] = { ...updatedPassenger_Details[index], [e.target.name]: e.target.value }
     setPassenger_Details(updatedPassenger_Details)
 
+
+
   }
 
-  const handlePaymentOption=(value)=>{
+  const handlePaymentOption = (value) => {
 
-    if(payment_selected!=value){
+    if (payment_selected != value) {
       setPaymentSelected(value)
 
-    }else{
+    } else {
       setPaymentSelected('')
     }
-    
-  }
-  const buyTicket= async ()=>{
 
-    const state=store.getState().var
+  }
+  const buyTicket = async () => {
+
+    const state = store.getState().var
     console.log(state.access_token)
- 
-    let flag=false
+
+    let flag = false
     // console.log('length',passenger_details)
-    passenger_details.map((item,index)=>{
-      if(item.name==''){
-        toast.warning(`Passenger ${index+1} detailas not filled`)
-        flag=true
-        
+    console.log('Passenger_info', passenger_details)
+    passenger_details.map((item, index) => {
+      if (item.name == '') {
+        toast.warning(`Passenger ${index + 1} detailas not filled`)
+        flag = true
+
       }
     })
-    if(flag==false){
-      let new_arr=[]
-      train.map((item,index)=>{
-        if(item.length>2){
-          const demo_pnr='ABCDEFGH12345678910IJKLMNOPQRSTUVWXYZ'
-          let pnr=''
-          for (let i = 0; i < 12; i++) {
-            const index=Math.floor(Math.random()*35)+0
-              pnr+=demo_pnr[index]
-            
+    if (flag == false) {
+      let new_arr = []
+      train.map((item, index) => {
+        if (typeof (item) == 'object') {
+
+          if (train.slice(-1)[0].length != 12) {
+            const demo_pnr = 'ABCDEFGH12345678910IJKLMNOPQRSTUVWXYZ'
+            let pnr = ''
+            for (let i = 0; i < 12; i++) {
+              const index = Math.floor(Math.random() * 35) + 0
+              pnr += demo_pnr[index]
+
+            }
+            let temp_train = [...train]
+            temp_train.push(pnr)
+            dispatch(addTrain(temp_train))
+
           }
 
-          let temp_train=[...train]
-          temp_train.push(pnr)
-
-          dispatch(addTrain(temp_train))
-          
-          
 
 
-          let temp_arr={
-            'compartment_id':'',
-            'passenger_id':'',
-            'seat_number':'',
-            'pnr':pnr
+
+          let temp_arr = {
+            'compartment_id': '',
+            'passenger_id': '',
+            'seat_number': '',
+            'pnr': train.slice(-1)[0]
           }
-          item.map((item2,index2)=>{
-            if(index2==0){
-              temp_arr.compartment_id=item2
-            }else if(index2==2){
-              temp_arr.seat_number=item2
+          item.map((item2, index2) => {
+            if (index2 == 0) {
+              temp_arr.compartment_id = item2
+            } else if (index2 == 2) {
+              temp_arr.seat_number = item2
             }
           })
-          temp_arr.passenger_id= train[2]
+          temp_arr.passenger_id = train[2]
           new_arr.push(temp_arr)
+          console.log(temp_arr)
+          console.log(train)
 
         }
+        
       })
 
-      // console.log('ticket',new_arr)
-
-      // await axios.post('http://127.0.0.1:8000/api/add_ticket',new_arr)
       await api.post('/add_ticket',new_arr)
       .then((res)=>{
         if(res.data.status==200){
@@ -169,7 +180,7 @@ console.log('train',train)
           },1500)
 
         }
-        
+
       })
       .catch((error)=>{
         console.log(error.response.status)
@@ -190,31 +201,31 @@ console.log('train',train)
               if(res.response.status==200){
                 api.post('/add_ticket',new_arr)
                 .then((res)=>{
-                  
+
                   if(res.data.status==200){
                     toast.success('Ticket Successfully purchased',{
                       autoClose:false
                     })
-          
+
                     setTimeout(()=>{
                       navigate('/ticket_purchased')
                     },1500)
-          
-                    
+
+
                   }
-                  
-                  
+
+
                 })
                 .catch((error)=>{
                   toast.error('Something went wrong')
                 })
-                
+
               }
             })
           }
-         
+
         }
-        
+
 
 
       })
@@ -240,9 +251,9 @@ console.log('train',train)
                     <div key={index} className='passenger-details'>
                       <h4>Passanger {index + 1}</h4>
                       <p>Name *</p>
-                      <input disabled name='name' id='input_field'  value={user?.first_name + ' ' + user?.sur_name} />
+                      <input disabled name='name' id='input_field' value={user?.first_name + ' ' + user?.sur_name} />
                       <p>Passenger Type</p>
-                      <select  id='input_field'  disabled value={passenger_details[index]?.passenger_type || ''} name='passenger_type' className='passenger-type' >
+                      <select id='input_field' disabled value={passenger_details[index]?.passenger_type || ''} name='passenger_type' className='passenger-type' >
                         <option value="Adult">Adult</option>
                         <option value="Child">Child</option>
                       </select>
@@ -254,9 +265,9 @@ console.log('train',train)
                     <div key={index} className='passenger-details'>
                       <h4>Passanger {index + 1}</h4>
                       <p>Name *</p>
-                      <input type="text" name='name' id='input_field'  onChange={(e) => handlePassenger_Details(e, index)} value={passenger_details[index]?.name || ''} />
+                      <input type="text" name='name' id='input_field' onChange={(e) => handlePassenger_Details(e, index)} value={passenger_details[index]?.name || ''} />
                       <p>Passenger Type</p>
-                      <select  id='input_field'  onChange={(e) => handlePassenger_Details(e, index)} value={passenger_details[index]?.passenger_type || ''} name='passenger_type' className='passenger-type' >
+                      <select id='input_field' onChange={(e) => handlePassenger_Details(e, index)} value={passenger_details[index]?.passenger_type || ''} name='passenger_type' className='passenger-type' >
                         <option value="Adult">Adult</option>
                         <option value="Child">Child</option>
                       </select>
@@ -323,7 +334,7 @@ console.log('train',train)
         {/* ----------------------------------payment----------------------------------------- */}
       </div>
       <div className="payment-info">
-        <ToastContainer/>
+        <ToastContainer />
         <section className='payment-left'>
           <h3 id='section-heading'>PAYMENT DETAILS</h3>
           <hr id='hr' />
@@ -352,84 +363,84 @@ console.log('train',train)
             </div>
             <div className='payment-method'>
               <div className='payment-option-tab'>
-                <div className={`mobile-banking-credit-debit-card ${payment_method == 'mobile-banking' ? 'active-border' : ''} `} onClick={() => {setPayment_method('mobile-banking'); setPaymentSelected('')}}>
+                <div className={`mobile-banking-credit-debit-card ${payment_method == 'mobile-banking' ? 'active-border' : ''} `} onClick={() => { setPayment_method('mobile-banking'); setPaymentSelected('') }}>
                   <p>Mobile Banking</p>
                 </div>
-                <div className={`mobile-banking-credit-debit-card ${payment_method == 'card-payment' ? 'active-border' : ''} `}onClick={() => {setPayment_method('card-payment'); setPaymentSelected('')}}>
+                <div className={`mobile-banking-credit-debit-card ${payment_method == 'card-payment' ? 'active-border' : ''} `} onClick={() => { setPayment_method('card-payment'); setPaymentSelected('') }}>
                   <p>Credit or Debit Card</p>
                 </div>
               </div>
               <div className={`select-payment-method ${payment_method == 'mobile-banking' ? 'active-payment' : ''} `}>
                 <p>Please select your mode of Payment Method</p>
-                <div className="bkash-nagad-rocket-upay" onClick={()=>handlePaymentOption('bkash')}>
+                <div className="bkash-nagad-rocket-upay" onClick={() => handlePaymentOption('bkash')}>
                   <div >
                     <img src={bkash} id='img' alt="" />
-                      {payment_selected=='bkash'? (<img src={checked} width={17} height={17} alt="" />): '' } 
+                    {payment_selected == 'bkash' ? (<img src={checked} width={17} height={17} alt="" />) : ''}
                   </div>
 
                 </div>
-                <div className="bkash-nagad-rocket-upay" onClick={()=>handlePaymentOption('nagad')}>
+                <div className="bkash-nagad-rocket-upay" onClick={() => handlePaymentOption('nagad')}>
                   <div >
                     <img src={nagad} id='img' alt="" />
-                      {payment_selected=='nagad'? (<img src={checked} width={17} height={17} alt="" />): '' } 
+                    {payment_selected == 'nagad' ? (<img src={checked} width={17} height={17} alt="" />) : ''}
                   </div>
 
                 </div>
-                <div className="bkash-nagad-rocket-upay" onClick={()=>handlePaymentOption('rocket')}>
+                <div className="bkash-nagad-rocket-upay" onClick={() => handlePaymentOption('rocket')}>
                   <div >
                     <img src={rocket} id='img' alt="" />
-                      {payment_selected=='rocket'? (<img src={checked} width={17} height={17} alt="" />): '' } 
+                    {payment_selected == 'rocket' ? (<img src={checked} width={17} height={17} alt="" />) : ''}
                   </div>
 
                 </div>
-                <div id='upay' className="bkash-nagad-rocket-upay" onClick={()=>handlePaymentOption('upay')} >
+                <div id='upay' className="bkash-nagad-rocket-upay" onClick={() => handlePaymentOption('upay')} >
                   <div>
                     <img src={upay} id='img' alt="" />
-                    {payment_selected=='upay'? (<img src={checked} width={17} height={17} alt="" />): '' } 
+                    {payment_selected == 'upay' ? (<img src={checked} width={17} height={17} alt="" />) : ''}
                   </div>
 
                 </div>
-              
-                <div id='btn-container'><button  disabled={payment_selected==''} onClick={buyTicket}  className={`btn-continue-purchase ${payment_selected!=''? 'activee':''}`}>CONTINUE PURCHASE</button></div>
+
+                <div id='btn-container'><button disabled={payment_selected == ''} onClick={buyTicket} className={`btn-continue-purchase ${payment_selected != '' ? 'activee' : ''}`}>CONTINUE PURCHASE</button></div>
               </div>
-              
+
 
 
               {/* -----------------for banking-------------------------- */}
 
               <div className={`select-payment-method ${payment_method == 'card-payment' ? 'active-payment' : ''}`}>
                 <p>Please select your mode of Payment Method</p>
-                <div className="bkash-nagad-rocket-upay" onClick={()=>handlePaymentOption('visa')} >
+                <div className="bkash-nagad-rocket-upay" onClick={() => handlePaymentOption('visa')} >
                   <div>
-                  <img src={visa} id='img' alt="" />
-                  {payment_selected=='visa'? (<img src={checked} width={17} height={17} alt="" />): '' } 
+                    <img src={visa} id='img' alt="" />
+                    {payment_selected == 'visa' ? (<img src={checked} width={17} height={17} alt="" />) : ''}
                   </div>
-                 
+
                 </div>
-                <div className="bkash-nagad-rocket-upay" onClick={()=>handlePaymentOption('mastercard')} >
+                <div className="bkash-nagad-rocket-upay" onClick={() => handlePaymentOption('mastercard')} >
                   <div>
-                  <img src={mastercard} id='img' alt="" />
-                  {payment_selected=='mastercard'? (<img src={checked} width={17} height={17} alt="" />): '' } 
-                    
-                  </div>
-                  
-                </div>
-                <div className="bkash-nagad-rocket-upay" onClick={()=>handlePaymentOption('rocket')} >
-                  <div> 
-                  <img src={rocket} id='img' alt="" />
-                  {payment_selected=='rocket'? (<img src={checked} width={17} height={17} alt="" />): '' } 
+                    <img src={mastercard} id='img' alt="" />
+                    {payment_selected == 'mastercard' ? (<img src={checked} width={17} height={17} alt="" />) : ''}
 
                   </div>
 
                 </div>
-                <div id='upay' className="bkash-nagad-rocket-upay" onClick={()=>handlePaymentOption('dutchbangla')} >
-                 <div>
-                 <img src={dutchbangla} id='img' alt="" />
-                 {payment_selected=='dutchbangla'? (<img src={checked} width={17} height={17} alt="" />): '' } 
-                 </div>
+                <div className="bkash-nagad-rocket-upay" onClick={() => handlePaymentOption('rocket')} >
+                  <div>
+                    <img src={rocket} id='img' alt="" />
+                    {payment_selected == 'rocket' ? (<img src={checked} width={17} height={17} alt="" />) : ''}
+
+                  </div>
+
                 </div>
-                <div id='btn-container'><button disabled={payment_selected==''}  onClick={buyTicket}  className={`btn-continue-purchase ${payment_selected!=''? 'activee':''}`}>CONTINUE PURCHASE</button></div>
-                
+                <div id='upay' className="bkash-nagad-rocket-upay" onClick={() => handlePaymentOption('dutchbangla')} >
+                  <div>
+                    <img src={dutchbangla} id='img' alt="" />
+                    {payment_selected == 'dutchbangla' ? (<img src={checked} width={17} height={17} alt="" />) : ''}
+                  </div>
+                </div>
+                <div id='btn-container'><button disabled={payment_selected == ''} onClick={buyTicket} className={`btn-continue-purchase ${payment_selected != '' ? 'activee' : ''}`}>CONTINUE PURCHASE</button></div>
+
               </div>
 
 
@@ -438,25 +449,25 @@ console.log('train',train)
           </div>
         </section>
         <section className='payment-right'>
-            <div className='passenger-info-journey-details'>
-              <h3 id='section-heading'>FARE DETAILS</h3>
-              <hr />
-              <div>
-                <p>Ticet Price</p>
-                <p>{total_amount}</p>
-              </div>
-              <div>
-                <p>VAT</p>
-                <p>5%</p>
-              </div>
-              <div>
-                <p>Service Charge</p>
-                <p>40</p>
-              </div>
-              <div>
-                <p><h4>**Total</h4></p>
-                <p><h4>{total_amount + Math.round(total_amount * 0.05) + 40}</h4></p>
-              </div>
+          <div className='passenger-info-journey-details'>
+            <h3 id='section-heading'>FARE DETAILS</h3>
+            <hr />
+            <div>
+              <p>Ticet Price</p>
+              <p>{total_amount}</p>
+            </div>
+            <div>
+              <p>VAT</p>
+              <p>5%</p>
+            </div>
+            <div>
+              <p>Service Charge</p>
+              <p>40</p>
+            </div>
+            <div>
+              <p><h4>**Total</h4></p>
+              <p><h4>{total_amount + Math.round(total_amount * 0.05) + 40}</h4></p>
+            </div>
 
           </div>
         </section>

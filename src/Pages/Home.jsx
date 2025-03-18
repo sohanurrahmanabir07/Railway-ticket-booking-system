@@ -1,17 +1,23 @@
 import React, { useEffect } from 'react'
 import Trainsearching from '../components/trainsearching'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import '../css/home.css'
 import { toast, ToastContainer } from 'react-toastify'
 import Dropdwon from '../components/dropdwon'
-import { store } from '../components/redux'
+import { loginUser, remove_after_purchasing_ticket, store } from '../components/redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 export default function Home() {
 
   const state=store.getState().var
   const navigate=useNavigate()
   const location=useLocation()
-  const time=Date.now()/1000
+  const dispatch=useDispatch()
+
+  useEffect(()=>{
+
+    dispatch(remove_after_purchasing_ticket())
+
+  },[])
 
 
 

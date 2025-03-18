@@ -82,7 +82,7 @@ export default function Seat_selection(props) {
   const clear_all_selected_seats = () => {
     setSelected([])
     setSeat_Details([])
-    dispatch(clear_all_selected_seats())
+    dispatch(clear_all_selected())
     setTotal_Amount(0)
 
   }
@@ -268,7 +268,7 @@ export default function Seat_selection(props) {
               
               <div>
 
-                <img src={horizontal_loading} alt="" width={90} height={50}  style={{color:'black'}} />
+                <img src={horizontal_loading} alt="" id='horizontal_loading'  />
 
               </div> :
 

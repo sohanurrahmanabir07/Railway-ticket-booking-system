@@ -1,15 +1,233 @@
-.drop{
-    /* width: 700px; */
-    /* height: 50px; */
-    background-color: yellow;
+.container-train-info{
+    display: flex;
+    justify-content: center;
+    margin-top: 1%;
+}
+#loading_holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:70vh; /* Takes up full viewport height */
+}
+
+.left-train-info{
+    background-color: aliceblue;
+    margin-right: 3%;
+    height: 200px;
+    box-sizing: border-box;
+    padding: 0.5% 1%;
+    letter-spacing: 0.25px;
+    line-height: 21px;
+    width: 22%;
+    
+
+}
+.left-train-info h2{
+    font-size: 18px;
+    color: #0f2444;
+}
+.searching-box{ 
+    background-color: white;
+    box-sizing: border-box;
+    padding: 2% 4%;
+    border-radius:10px;
+    margin: 15px 0;
+    cursor: pointer;
+    position: relative;
+
+
+
+
+
+}
+.searching-box p{
+    font-size: 0.6em;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: gray;
+}
+.show_results{
+    background-color:white ;
+    border: 1px dotted gray;
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+}
+.show_results h4{
+    padding: 0.5%;
+    cursor: pointer;
+    font-size: 1.0.1em;
+    color: rgb(47, 47, 78);
+}
+.show_results h4:hover{
+    background-color: #039164;
+    color: white;
+}
+
+
+.searching-box input{
+    height: 2rem;
+    width: 100%;
+    border: none;
+    color: black;
+    font-size: 1.01rem;
+}
+.searching-box input:focus{
+    outline: none;
+    border: none;
+}
+.left-train-info button{
+    width: 100%;
+    height: 30px;
+    background-color: #016848;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.left-train-info button:hover{
+    background-color:#004630;
+}
+
+/* 
+----------------------------Right--------------------- */
+
+.right-train-info{
+    background-color: rgb(255, 255, 255);
+    width: 40%;
+    box-sizing: border-box;
+    padding: 1% 1%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.train-name-info {
+    box-sizing: border-box;
+    padding-bottom:2% ;
+    border-bottom: 2px dotted gray;
+    margin-bottom: 1%;
+
+}
+.train-name-info h3{
+    font-size: 1rem;
+    color: orange;
+
+
     
 }
-.ddd{
-    background-color: rgb(23, 129, 222);
-    max-height: 0;
-    overflow: hidden;
+#routes{
+    font-size: 16px;
+    border-bottom: 2px solid green;
+    line-height: 25px;
+    width:fit-content;
+
 }
-.form{
-    background-color: orange;
-    width: 20%;
+.route-info{
+    margin-bottom: 1%;
+    border-bottom: 1px dotted rgb(179, 179, 179);
+    padding: 2% 0;
+    font-size: 1em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: rgb(73, 73, 87);
+}
+.icon-station{
+    display: flex;
+    align-items: center;
+}
+.icon-station img{
+    width: 2%;
+    height: 15px;
+    margin-right: 1%;
+}
+.route-info table{
+    padding: 1.5% 0;
+    width: 100%;
+
+}
+
+#initial-value{
+    display: flex;
+    align-items: center;
+    padding-left: 6%;
+}
+.train-info-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    line-height: 10px;
+    font-size: 14px;
+    color: gray;
+}
+.train-info-image img{
+    width: 60%;
+}
+
+@media screen and (width <= 1226px) {
+    .left-train-info{
+
+        width: 30%;
+    }
+}
+@media screen and (width <= 900px) {
+    .container-train-info{
+        flex-direction: column;
+        align-items: center;
+    }
+    .left-train-info{
+
+        width: 50%;
+        margin-right: 0;
+        margin-bottom: 3%;
+    }
+    .right-train-info{
+        width: 70%;
+        margin-left: 0;
+    }
+}
+@media screen and (width <= 900px) {
+
+    .left-train-info{
+
+        width: 70%;
+        margin-right: 0;
+        margin-bottom: 3%;
+    }
+    .right-train-info{
+        width: 80%;
+        margin-left: 0;
+    }
+}
+@media screen and (width <= 420px) {
+
+    .left-train-info{
+
+        width: 80%;
+        margin-right: 0;
+        margin-bottom: 3%;
+    }
+    .right-train-info{
+        width: 90%;
+        margin-left: 0;
+    }
+}
+@media screen and (width <= 316px) {
+
+    .left-train-info{
+
+        width: 95%;
+        margin-right: 0;
+        margin-bottom: 3%;
+    }
+    .right-train-info{
+        width: 100%;
+        margin-left: 0;
+    }
 }

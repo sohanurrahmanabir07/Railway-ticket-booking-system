@@ -5,6 +5,7 @@ import { addDetails, showDetails,add_home_page_info } from './redux';
 import './css_comp/trainsearching.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Date_modifier from './css_comp/Date_modifier';
 
 export default function Trainsearching() {
     const dispatch = useDispatch();
@@ -13,12 +14,10 @@ export default function Trainsearching() {
     const [from, setFrom] = useState('')
     const [to, setTo] = useState('')
     const [date, setDate] = useState('')
-    // const train = useSelector((state) => state.var.train)
     const home_page_info=useSelector((state)=>state.var.home_page_info)
     const [classs, setClass] = useState('')
     const [show1, setShow1] = useState(true)
     const [show2, setShow2] = useState(true)
-    // const s = useSelector((state) => state.var.journey_inf)
     const [enble_btn,setEanblebtn]=useState(false)
     const [result, setResult] = useState([]) 
 
@@ -27,7 +26,6 @@ export default function Trainsearching() {
        const fetch= async ()=>{
             await axios.get('http://127.0.0.1:8000/api/get_stations')
             .then((res)=>{
-                // console.log(res.data.stations)
                 setResult(res.data.stations)
             })
             .catch((error)=>{
@@ -51,11 +49,12 @@ export default function Trainsearching() {
 
     const passinfo = (e) => {
         e.preventDefault()
+        const modifed_date=Date_modifier(date)
         if (from && to && date && classs) {
             const journey_info = {
                 from: from,
                 to: to,
-                date: date,
+                date: modifed_date,
                 class: classs
             }
             dispatch(add_home_page_info(journey_info))
@@ -130,7 +129,7 @@ export default function Trainsearching() {
 
                     </div>
 
-                    {/* {from && to && date && classs ? <div style={{ marginTop: 80, display: 'flex', justifyContent: 'center', alignItems: 'center', width: 'auto' }}><button style={{ minWidth: 50, minHeight: 20, border: '2px solid gray', padding: 5, borderRadius: 10, cursor: 'pointer' }} >Search</button></div> : <div style={{ marginTop: 80, display: 'flex', justifyContent: 'center', alignItems: 'center', width: 'auto' }}><button style={{ minWidth: 50, minHeight: 20, border: '2px solid gray', padding: 5, borderRadius: 10, cursor: 'not-allowed' }} >Search</button></div>} */}
+            
 
 
 

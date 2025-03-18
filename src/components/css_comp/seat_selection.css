@@ -121,6 +121,7 @@
     /* background-color: rgb(25, 127, 216); */
     width: 4rem;
 }
+
 #row{
     display: flex;
     flex-wrap: wrap;
